@@ -1,0 +1,10 @@
+Bids
+Products
+Product Factory pattern
+Bid History
+User dashboard / Type of User
+Active User
+
+
+
+Log In vs Create Account -> 1st priority
