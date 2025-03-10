@@ -6,11 +6,11 @@
 
 class User {
     public:
-        User(long phone_no_, std::string username_, std::string address_, double account_balance_) : 
-        phone_no_(phone_no_),
-        username_(username_),
-        address_(address_),
-        account_balance_(account_balance_) {}
+        User(long phone_no_, std::string username_, std::string address_, double account_balance_)
+        :   phone_no_(phone_no_),
+            username_(username_),
+            address_(address_),
+            account_balance_(account_balance_) {}
 
         virtual ~User();
 
@@ -31,8 +31,8 @@ class User {
 
 class Seller : public User {
     public:
-        Seller(long phone_no_, std::string username_, std::string address_, double account_balance_) :
-        User(phone_no_, username_, address_, account_balance_) {}
+        Seller(long phone_no_, std::string username_, std::string address_, double account_balance_)
+        : User(phone_no_, username_, address_, account_balance_) {}
 
         void postProduct();
         void openBid();
@@ -60,8 +60,8 @@ class Seller : public User {
 
 class Buyer : public User {
     public:
-    Buyer(long phone_no_, std::string username_, std::string address_, double account_balance_) :
-    User(phone_no_, username_, address_, account_balance_) {}
+    Buyer(long phone_no_, std::string username_, std::string address_, double account_balance_)
+    : User(phone_no_, username_, address_, account_balance_) {}
 
 
         void findProductsForSale();

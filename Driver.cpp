@@ -2,7 +2,9 @@
 #include "BidManager.h"
 #include "Users.h"
 #include <iostream>
+#include <sstream>
 #include <fstream>
+#include <string>
 
 Driver* Driver::instance = nullptr;
 BidManager* Driver::bidManager = nullptr; 
@@ -10,36 +12,35 @@ BidManager* Driver::bidManager = nullptr;
 
 Driver::Driver() {
     bidManager = BidManager::getInstance();
-
 }
 
 void Driver::Run() {
     storeFront();
-    
-    Seller *seller = new Seller(1,"2","2",3);
-    std::cout << *seller << std::endl;
-
-    seller->dashboard();
-
+    loadAccounts();
 }
 
 
 
+void Driver::loadAccounts() {
+    std::ifstream buyer_data("data/buyer_data.csv");
+    if (!buyer_data.is_open()) {
+        std::cout << "Error opening buyer file" << std::endl;
+        return;
+    }
 
+    std::string line;
+    std::string line2;
+    std::getline(buyer_data, line); // Skip first line with columns
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    while (std::getline(buyer_data, line)) {
+        std::istringstream ss(line);
+        
+        while (std::getline(ss, line2, ',')) {
+            std::cout << line2 << std::endl;
+            std::cout << "asdasd" << std::endl;
+        }
+    }
+}
 
 
 void Driver::storeFront() {
