@@ -4,6 +4,25 @@
 
 User::~User() {} // Undefined referance to v-table
 
+void User::setPhoneNumber(std::string phone_no_){
+    this->phone_no_ = phone_no_;
+}
+
+void User::setAddress(std::string address_){
+    this->address_ = address_;
+}
+
+void User::updateAccountInformation() {
+    std::cout << "Select Info to change.\n";
+    std::cout << "1) Address.\n";
+    std::cout << "2) Phone Number.\n";
+
+    // Some user input if 1 -> ask for new address -> call set address
+    // Some user input if 2 -> ask for new phone number -> call set phone number
+
+    
+
+}
 
 
 
@@ -11,10 +30,6 @@ User::~User() {} // Undefined referance to v-table
 
 
 // SELLER METHODS
-void Seller::updateAccountInformation() {
-    std::cout << "Updating seller account information.\n";
-}
-
 void Seller::history() {
     std::cout << "Displaying seller history.\n";
 }
@@ -23,23 +38,20 @@ void Seller::dashboard() {
     std::cout << "Showing seller dashboard.\n";
 }
 
-void Seller::postProduct() {
+void Seller::productOverview() {
     std::cout << "Posting product for sale.\n";
 }
 
-void Seller::openBid() {
+void Seller::openBidforProduct() {
     std::cout << "Opening bid for a product.\n";
 }
 
-void Seller::closeBid() {
+void Seller::closeBidforProduct() {
     std::cout << "Closing bid for a product.\n";
 }
 
 
 // BUYER METHOD
-void Buyer::updateAccountInformation() {
-    std::cout << "Updating seller account information.\n";
-}
 
 void Buyer::history() {
     std::cout << "Displaying seller history.\n";
@@ -53,6 +65,6 @@ void Buyer::findProductsForSale() {
     std::cout << "Finding products for sale.\n";
 }
 
-void Buyer::placeBid() {
+void Buyer::placeBidforProduct() {
     std::cout << "Place bid for a product.\n";
 }

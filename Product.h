@@ -32,21 +32,6 @@ class Phone : public Electronics {
         : Electronics(base_price, product_quality) {}
 };
 
-class Tablet : public Electronics {
-    public:
-        Tablet(double base_price, PRODUCT_QUALITY product_quality) 
-        : Electronics(base_price, product_quality) {}
-};
-
-class Laptop : public Electronics {
-    public:
-        Laptop(double base_price, PRODUCT_QUALITY product_quality) 
-        : Electronics(base_price, product_quality) {}
-};
-
-
-
-
 
 
 
@@ -64,16 +49,5 @@ class AudioBook : public Media {
         : Media(base_price, product_quality) {}
 };
 
-class Podcast : public Media {
-    public:
-        Podcast(double base_price, PRODUCT_QUALITY product_quality) 
-        : Media(base_price, product_quality) {}
-};
-
-class Song : public Media {
-    public:
-        Song(double base_price, PRODUCT_QUALITY product_quality) 
-        : Media(base_price, product_quality) {}
-};
 
 #endif

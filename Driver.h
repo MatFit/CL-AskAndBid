@@ -3,9 +3,10 @@
 #include "Users.h"
 #include <iostream>
 #include <vector>
+#include <string>
 
 
-class BidManager; // Neat strat
+class BidManager;
 class Driver {
     public:
         static Driver* getInstance(){
