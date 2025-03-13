@@ -65,9 +65,8 @@ class Seller : public User {
             return os;
         }
     private:
-        std::vector<int*> activeProductsforSale; // Temp datatype, will be Products
+        std::vector<int> activeProductsforSale; // Temp datatype, will be Products
         
-
 };
 
 

@@ -23,12 +23,12 @@ class Driver {
         
 
         void storeFront();
-        void loadAccounts();
+        void load();
 
     private:
         static Driver* instance;
         static BidManager* bidManager;
-        User* activeUser;
+        User* activeUser = nullptr;
 
         std::vector<Seller*> sellers;
         std::vector<Buyer*> buyers;

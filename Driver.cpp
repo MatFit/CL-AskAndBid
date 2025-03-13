@@ -17,7 +17,7 @@ Driver::Driver() {
 
 
 void Driver::Run() {
-    loadAccounts();
+    load();
 
     int input = 0;
     do {
@@ -39,6 +39,12 @@ void Driver::Run() {
 
 
     storeFront();
+
+    if (activeUser == nullptr){ 
+        std::cout << "No active user" << std::endl; 
+        return;
+    }
+
     std::cout << *activeUser << std::endl;
     activeUser->dashboard(); // -> handle the next phase stuff here?
 
@@ -46,7 +52,7 @@ void Driver::Run() {
 
 
 
-void Driver::loadAccounts() {
+void Driver::load() {
     /*
         I believe this method properly stores all accounts in the appropriate vectors in the
         meantime
@@ -123,10 +129,37 @@ void Driver::storeFront() {
 void Driver::Login(){
     std::cout << "We logging in baby" << std::endl;
     //
+    // Account type login
+    int account_type = 0;
+    while (true) {
+        std::cout << "Log In Account Type? \n";
+        std::cout << "1) Buyer\n";
+        std::cout << "2) Seller\n";
+        if (std::cin >> account_type && (account_type == 1 || account_type == 2)) {
+            break;
+        }
+
+        std::cout << "Invalid input. Please enter 1 or 2.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    // File name
+    std::string filename;
+    if (account_type == 1){ filename = "data/buyer_data.csv"; }
+    else { filename = "data/seller_data.csv"; }
 
 
+    std::ifstream file(filename);
+    if(!file.is_open()){ std::cout << "Error opening file for Login" << std::endl; }
 
 
+    std::string row;
+
+    while (std::getline(file, row)) {
+        std::cout << row << std::endl;
+    }
+    
 }
 
 void Driver::CreateAccount() {
@@ -150,30 +183,26 @@ void Driver::CreateAccount() {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
-    // Get username
     std::cout << "Enter username: ";
     std::cin >> username;
-
-    // Get password
     std::cout << "Enter password: ";
     std::cin >> password;
 
     // Clear buffer
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    // Get address
+
     std::cout << "Enter address: ";
     std::getline(std::cin, address);
-
-    // Get phone number
     std::cout << "Enter phone number: ";
     std::getline(std::cin, phone_number);
 
     // Get account balance
     while (true) {
         std::cout << "Enter account balance: ";
-        if (std::cin >> account_balance) break;
+        if (std::cin >> account_balance){ break; }
         std::cout << "Invalid input. Please enter a number.\n";
+
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
@@ -181,20 +210,16 @@ void Driver::CreateAccount() {
     
     
     // File path
-    const std::string filename = (account_type == 1) 
-        ? "data/buyer_data.csv" 
-        : "data/seller_data.csv";
+    std::string filename;
+
+    if (account_type == 1){ filename = "data/buyer_data.csv"; }
+    else { filename = "data/seller_data.csv"; }
 
 
     // Writing
-    std::ofstream file(filename, std::ios::app); // Open in append mode
+    std::ofstream file(filename, std::ios::app); // Open file at the end of it (std::ios::append)
     if (file.is_open()) {
-        file // Ensure the data starts on a new line
-            << username << ","
-            << password << ","
-            << address << ","
-            << phone_number << ","
-            << account_balance << "\n";
+        file << username << "," << password << "," << address << "," << phone_number << "," << account_balance << "\n";
         file.close();
     } else {
         std::cerr << "Error: Could not open file for writing!\n";
