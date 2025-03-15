@@ -1,16 +1,9 @@
 #include "Driver.h"
-#include "BidManager.h"
+#include "Manager.h"
 #include "Users.h"
 
 User::~User() {} // Undefined referance to v-table
 
-void User::setPhoneNumber(std::string phone_no_){
-    this->phone_no_ = phone_no_;
-}
-
-void User::setAddress(std::string address_){
-    this->address_ = address_;
-}
 
 void User::updateAccountInformation() {
     std::cout << "Select Info to change.\n";

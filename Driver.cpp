@@ -1,5 +1,5 @@
 #include "Driver.h"
-#include "BidManager.h"
+#include "Manager.h"
 #include "Users.h"
 #include <iostream>
 #include <sstream>
@@ -8,11 +8,11 @@
 #include <string>
 
 Driver* Driver::instance = nullptr;
-BidManager* Driver::bidManager = nullptr; 
+Manager* Driver::manager = nullptr; 
 
 
 Driver::Driver() {
-    bidManager = BidManager::getInstance();
+    manager = Manager::getInstance();
 }
 
 

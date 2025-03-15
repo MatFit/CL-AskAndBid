@@ -5,6 +5,14 @@
 #include <iostream>
 #include <vector>
 
+
+struct Bid {
+    Bid();
+};
+
+
+
+
 class User {
     public:
         User(std::string phone_no_, std::string username_, std::string address_, double account_balance_)
@@ -20,10 +28,7 @@ class User {
         virtual void dashboard() = 0; // Resolves undefined references
 
         void updateAccountInformation();
-
         double getAccountBalance() const { return account_balance_; }
-        void setPhoneNumber(std::string phone_no_);
-        void setAddress(std::string address_);
 
     protected:
         std::string phone_no_;
@@ -52,6 +57,7 @@ class Seller : public User {
         void productOverview(); // Sold or yet to be sold
         void openBidforProduct();
         void closeBidforProduct();
+        // Override Methods
         void history() override;
         void dashboard() override;
 
@@ -78,8 +84,10 @@ class Buyer : public User {
     : User(phone_no_, username_, address_, account_balance_) {}
 
 
-        void findProductsForSale(); // Depends if product is open or closed
-        void placeBidforProduct();
+        void findProductsForSale(); // Finds product if bid is active for it
+        void placeBidforProduct(); // places bid on P product
+
+        // Override Methods
         void history() override;
         void dashboard() override;
         

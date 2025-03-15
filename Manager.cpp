@@ -1,10 +1,10 @@
 #include "Driver.h"
-#include "BidManager.h"
+#include "Manager.h"
 #include "Users.h"
 #include <iostream>
 
-BidManager* BidManager::instance = nullptr;
+Manager* Manager::instance = nullptr;
 
-BidManager::BidManager() {
+Manager::Manager() {
     std::cout << "bidding big" << std::endl;
 }

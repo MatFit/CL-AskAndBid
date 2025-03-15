@@ -1,5 +1,5 @@
 #include "Driver.h"
-#include "BidManager.h"
+#include "Manager.h"
 #include "Users.h"
 #include <iostream>
 

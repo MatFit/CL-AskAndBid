@@ -6,7 +6,7 @@
 #include <string>
 
 
-class BidManager;
+class Manager;
 class Driver {
     public:
         static Driver* getInstance(){
@@ -27,7 +27,7 @@ class Driver {
 
     private:
         static Driver* instance;
-        static BidManager* bidManager;
+        static Manager* manager;
         User* activeUser = nullptr;
 
         std::vector<Seller*> sellers;
