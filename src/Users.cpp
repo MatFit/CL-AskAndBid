@@ -1,6 +1,6 @@
-#include "headers/Driver.h"
-#include "headers/Manager.h"
-#include "headers/Users.h"
+#include "Driver.h"
+#include "Manager.h"
+#include "Users.h"
 
 User::~User() {} // Undefined referance to v-table
 
