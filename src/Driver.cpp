@@ -112,7 +112,7 @@ void Driver::load() {
 void Driver::storeFront() {
     std::string line;
     std::ifstream store_front;
-    store_front.open("arts/storefront.txt");
+    store_front.open("../arts/storefront.txt");
 
     if (store_front.is_open()) {
         while (std::getline(store_front, line)) {
