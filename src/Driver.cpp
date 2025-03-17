@@ -27,10 +27,10 @@ std::vector<std::string> split(std::string& s, const std::string& delimiter) {
 }
 
 
+
 Driver::Driver() {
     manager = Manager::getInstance();
 }
-
 
 void Driver::Run() {
     load();
@@ -63,8 +63,6 @@ void Driver::Run() {
     std::cout << *activeUser << std::endl;
     activeUser->dashboard(); // -> handle the next phase stuff here?
 }
-
-
 
 void Driver::load() {
     /*

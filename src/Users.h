@@ -1,15 +1,10 @@
 #ifndef USER_H
 #define USER_H
+#include "Bid.h"
 #include <string>
 #include <ostream>
 #include <iostream>
 #include <vector>
-
-
-struct Bid {
-    Bid();
-};
-
 
 
 
@@ -58,7 +53,7 @@ class Seller : public User {
         void productOverview(); // Sold or yet to be sold
         void openBidforProduct();
         void closeBidforProduct();
-        
+
         // Override Methods
         void history() override;
         void dashboard() override;
@@ -94,8 +89,6 @@ class Buyer : public User {
         void dashboard() override;
         
 
-
-
         friend std::ostream& operator<<(std::ostream& os, const Buyer &Buyer){
             os << "              | Username : " << Buyer.username_ << std::endl;
             os << "  Buyer Info  | Phone Number : " << Buyer.phone_no_ << std::endl;
@@ -104,7 +97,7 @@ class Buyer : public User {
             return os;
         }
     private:
-        std::vector<int*> activeBids; // temp rn, will be Bids
+        std::vector<Bid*> activeBids; // temp rn, will be Bids
 };
 
 #endif
