@@ -27,7 +27,6 @@ std::vector<std::string> split(std::string& s, const std::string& delimiter) {
 }
 
 
-
 Driver::Driver() {
     manager = Manager::getInstance();
 }
@@ -89,7 +88,7 @@ void Driver::load() {
         Buyer *buyer = new Buyer(data[0], data[2], data[3], std::stod(data[4]));
         buyers.push_back(buyer);
     }
-    buyer_data.close()
+    buyer_data.close();
     
 
 
@@ -110,8 +109,6 @@ void Driver::load() {
     }
     seller_data.close();
 }
-
-
 
 void Driver::Login(){
 
