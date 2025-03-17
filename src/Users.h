@@ -15,10 +15,10 @@ struct Bid {
 
 class User {
     public:
-        User(std::string phone_no_, std::string username_, std::string address_, double account_balance_)
-        :   phone_no_(phone_no_),
-            username_(username_),
+        User(std::string username_, std::string address_, std::string phone_no_, double account_balance_)
+        :   username_(username_),
             address_(address_),
+            phone_no_(phone_no_),
             account_balance_(account_balance_) {}
 
         virtual ~User();
@@ -29,11 +29,12 @@ class User {
 
         void updateAccountInformation();
         double getAccountBalance() const { return account_balance_; }
+        std::string getUsername() { return username_; }
 
     protected:
-        std::string phone_no_;
         std::string username_;
         std::string address_;
+        std::string phone_no_;
         double account_balance_;
 
 
@@ -51,12 +52,13 @@ class User {
 
 class Seller : public User {
     public:
-        Seller(std::string phone_no_, std::string username_, std::string address_, double account_balance_)
-        : User(phone_no_, username_, address_, account_balance_) {}
+        Seller(std::string username_, std::string address_, std::string phone_no_, double account_balance_)
+        : User(username_, address_, phone_no_, account_balance_) {}
 
         void productOverview(); // Sold or yet to be sold
         void openBidforProduct();
         void closeBidforProduct();
+        
         // Override Methods
         void history() override;
         void dashboard() override;
@@ -80,8 +82,8 @@ class Seller : public User {
 
 class Buyer : public User {
     public:
-    Buyer(std::string phone_no_, std::string username_, std::string address_, double account_balance_)
-    : User(phone_no_, username_, address_, account_balance_) {}
+    Buyer(std::string username_, std::string address_, std::string phone_no_, double account_balance_)
+    : User(username_, address_, phone_no_, account_balance_) {}
 
 
         void findProductsForSale(); // Finds product if bid is active for it

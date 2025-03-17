@@ -10,6 +10,23 @@
 Driver* Driver::instance = nullptr;
 Manager* Driver::manager = nullptr; 
 
+// Helper function to split csv with delimiter (",")
+std::vector<std::string> split(std::string& s, const std::string& delimiter) {
+    std::vector<std::string> tokens;
+    size_t position = 0;
+    std::string substring;
+    
+    while ((position = s.find(delimiter)) != std::string::npos) {
+        substring = s.substr(0, position);
+        tokens.push_back(substring);
+        s.erase(0, position + delimiter.length());
+    }
+    tokens.push_back(s);
+
+    return tokens;
+}
+
+
 
 Driver::Driver() {
     manager = Manager::getInstance();
@@ -33,7 +50,6 @@ void Driver::Run() {
 
     } while (input != 1 && input != 2);
 
-
     if (input == 1){ Login(); }
     else { CreateAccount(); }
 
@@ -41,13 +57,12 @@ void Driver::Run() {
     storeFront();
 
     if (activeUser == nullptr){ 
-        std::cout << "No active user" << std::endl; 
+        std::cout << "No active user in session" << std::endl; 
         return;
     }
 
     std::cout << *activeUser << std::endl;
     activeUser->dashboard(); // -> handle the next phase stuff here?
-
 }
 
 
@@ -67,26 +82,18 @@ void Driver::load() {
 
     std::string row;
     std::string data;
-    std::vector<std::string> temp;
     std::getline(buyer_data, row); // Skip first line with columns
 
     while (std::getline(buyer_data, row)) {
-        std::istringstream ss(row);
-        
-        while (std::getline(ss, data, ',')) {
-            temp.push_back(data);
-        }
-
-        Buyer *buyer = new Buyer(temp[3], temp[0], temp[2], std::stod(temp[4]));
+        std::vector<std::string> data = split(row, ",");
+        Buyer *buyer = new Buyer(data[0], data[2], data[3], std::stod(data[4]));
         buyers.push_back(buyer);
     }
-
-    // Cleans
-    row = "";
-    data = "";
-    temp.clear();
+    buyer_data.close()
     
 
+
+    
     // Sellers
     std::ifstream seller_data("data/seller_data.csv");
     if (!seller_data.is_open()) {
@@ -97,38 +104,17 @@ void Driver::load() {
     std::getline(seller_data, row); // Skip first line with columns
 
     while (std::getline(seller_data, row)) {
-        std::istringstream ss(row);
-        
-        while (std::getline(ss, data, ',')) {
-            temp.push_back(data);
-        }
-
-        Seller *seller = new Seller(temp[3], temp[0], temp[2], std::stod(temp[4]));
+        std::vector<std::string> data = split(row, ",");
+        Seller *seller = new Seller(data[0], data[2], data[3], std::stod(data[4]));
         sellers.push_back(seller);
     }
+    seller_data.close();
 }
 
-
-void Driver::storeFront() {
-    std::string line;
-    std::ifstream store_front;
-    store_front.open("../arts/storefront.txt");
-
-    if (store_front.is_open()) {
-        while (std::getline(store_front, line)) {
-            std::cout << line << std::endl;
-        }
-        store_front.close();
-    }
-    else{
-        std::cout << "asdasJHUIAYGSKDBJ" << std::endl;
-    }
-}
 
 
 void Driver::Login(){
-    std::cout << "We logging in baby" << std::endl;
-    //
+
     // Account type login
     int account_type = 0;
     while (true) {
@@ -144,22 +130,82 @@ void Driver::Login(){
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
+
+
+
     // File name
     std::string filename;
     if (account_type == 1){ filename = "data/buyer_data.csv"; }
     else { filename = "data/seller_data.csv"; }
 
-
+    
     std::ifstream file(filename);
-    if(!file.is_open()){ std::cout << "Error opening file for Login" << std::endl; }
+    if(!file.is_open()){ 
+        std::cout << "Error opening file for Login" << std::endl; 
+        return;
+    }
 
 
-    std::string row;
+    std::string input_username, input_password;
+    int attempts = 3;
 
-    while (std::getline(file, row)) {
-        std::cout << row << std::endl;
+    do {
+        std::cout << "Username : ";
+        std::cin >> input_username;
+        
+        std::cout << "Password : ";
+        std::cin >> input_password;
+
+
+
+        std::string row;
+        std::string delimiter = ",";
+        bool found = false;
+        
+        while (std::getline(file, row)) {
+            std::vector<std::string> data = split(row, delimiter);
+
+            if (data[0] == input_username && data[1] == input_password) {
+                std::cout << "account found" << std::endl;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found){
+            std::cout << "Invalid credientials. Try again" << std::endl;
+            attempts -= 1; 
+        }
+        else { break; }
+
+    } while(attempts > 0);
+
+    if (attempts <= 0) {
+        std::cout << "Maximum attempts reached." << std::endl;
+        return;
     }
     
+
+
+
+    if (account_type == 1) { 
+        for (const auto &b : buyers){
+            if (b->getUsername() == input_username){
+                activeUser = b;
+            }
+        }
+    }
+    else if (account_type == 2){
+        for (const auto &s : sellers){
+            if (s->getUsername() == input_username){
+                activeUser = s;
+            }
+        }
+    }
+
+    if (activeUser == nullptr) {
+        std::cout << "User found in file but not in memory" << std::endl;
+    }
 }
 
 void Driver::CreateAccount() {
@@ -236,5 +282,18 @@ void Driver::CreateAccount() {
         Seller *seller = new Seller(phone_number, username, address, account_balance);
         sellers.push_back(seller);
         activeUser = seller;
+    }
+}
+
+void Driver::storeFront() {
+    std::string line;
+    std::ifstream store_front;
+    store_front.open("arts/storefront.txt");
+
+    if (store_front.is_open()) {
+        while (std::getline(store_front, line)) {
+            std::cout << line << std::endl;
+        }
+        store_front.close();
     }
 }
