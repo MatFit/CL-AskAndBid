@@ -32,6 +32,9 @@ class Driver {
 
         std::vector<Seller*> sellers;
         std::vector<Buyer*> buyers;
+        // Manager class will handle and notify
+        std::vector<Bid*> bids;
+        std::vector<Product*> productsForSale;
 
         Driver();
 };

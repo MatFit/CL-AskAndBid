@@ -27,7 +27,6 @@ std::vector<std::string> split(std::string& s, const std::string& delimiter) {
 }
 
 
-
 Driver::Driver() {
     manager = Manager::getInstance();
 }
@@ -83,7 +82,7 @@ void Driver::load() {
 
     while (std::getline(buyer_data, row)) {
         std::vector<std::string> data = split(row, ",");
-        Buyer *buyer = new Buyer(data[0], data[2], data[3], std::stod(data[4]));
+        Buyer *buyer = new Buyer(data[0], data[1], data[2], data[3], std::stod(data[4]));
         buyers.push_back(buyer);
     }
     buyer_data.close();
@@ -102,7 +101,7 @@ void Driver::load() {
 
     while (std::getline(seller_data, row)) {
         std::vector<std::string> data = split(row, ",");
-        Seller *seller = new Seller(data[0], data[2], data[3], std::stod(data[4]));
+        Seller *seller = new Seller(data[0], data[1], data[2], data[3], std::stod(data[4]));
         sellers.push_back(seller);
     }
     seller_data.close();
@@ -270,11 +269,11 @@ void Driver::CreateAccount() {
 
     // Create User object
     if (account_type == 1) {
-        Buyer *buyer = new Buyer(phone_number, username, address, account_balance);
+        Buyer *buyer = new Buyer(phone_number, password, username, address, account_balance);
         buyers.push_back(buyer);
         activeUser = buyer;
     } else {
-        Seller *seller = new Seller(phone_number, username, address, account_balance);
+        Seller *seller = new Seller(phone_number, password, username, address, account_balance);
         sellers.push_back(seller);
         activeUser = seller;
     }

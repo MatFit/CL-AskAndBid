@@ -10,8 +10,9 @@
 
 class User {
     public:
-        User(std::string username_, std::string address_, std::string phone_no_, double account_balance_)
+        User(std::string username_, std::string password_, std::string address_, std::string phone_no_, double account_balance_)
         :   username_(username_),
+            password_(password_),
             address_(address_),
             phone_no_(phone_no_),
             account_balance_(account_balance_) {}
@@ -28,6 +29,7 @@ class User {
 
     protected:
         std::string username_;
+        std::string password_;
         std::string address_;
         std::string phone_no_;
         double account_balance_;
@@ -47,8 +49,8 @@ class User {
 
 class Seller : public User {
     public:
-        Seller(std::string username_, std::string address_, std::string phone_no_, double account_balance_)
-        : User(username_, address_, phone_no_, account_balance_) {}
+        Seller(std::string username_, std::string password_, std::string address_, std::string phone_no_, double account_balance_)
+        : User(username_, password_, address_, phone_no_, account_balance_) {}
 
         void productOverview(); // Sold or yet to be sold
         void openBidforProduct();
@@ -77,8 +79,8 @@ class Seller : public User {
 
 class Buyer : public User {
     public:
-    Buyer(std::string username_, std::string address_, std::string phone_no_, double account_balance_)
-    : User(username_, address_, phone_no_, account_balance_) {}
+    Buyer(std::string username_, std::string password_, std::string address_, std::string phone_no_, double account_balance_)
+    : User(username_, password_, address_, phone_no_, account_balance_) {}
 
 
         void findProductsForSale(); // Finds product if bid is active for it
