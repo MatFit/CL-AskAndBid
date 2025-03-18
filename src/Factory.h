@@ -5,7 +5,6 @@
 #include <memory>
 
 
-
 // Factory class
 class ProductFactory {
 public:

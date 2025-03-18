@@ -1,2 +1,3 @@
-username, password, product_type, price
-Alice, password, ELECTRONICS_PHONE, 5
+username,password,product_type,price
+Alice,password,ELECTRONICS_PHONE,5
+Jeff,password,ELECTRONICS_PHONE,6

@@ -3,6 +3,7 @@
 #include "Users.h"
 #include "Bid.h"
 #include "Product.h"
+#include "Factory.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -132,15 +133,42 @@ void Driver::Load() {
         std::cout << "Error opening bid file" << std::endl;
         return;
     }
-    std::getline(seller_data, row); // Skip first line with columns
+    std::getline(bid_data, row); // Skip first line with columns
 
-    while (std::getline(seller_data, row)) {
+    while (std::getline(bid_data, row)) {
         std::vector<std::string> data = split(row, ",");
         Bid *bid = new Bid(data[0], data[1], stringToProduct(data[2]), std::stod(data[3]));
         bids.push_back(bid);
     }
     bid_data.close();
+
+
+
+
     
+    // Product
+    std::ifstream product_data("data/products.csv");
+    if (!product_data.is_open()) {
+        std::cout << "Error opening product file" << std::endl;
+        return;
+    }
+
+    std::getline(product_data, row); // Skip first line with columns
+
+    while (std::getline(product_data, row)) {
+        std::vector<std::string> data = split(row, ",");
+        Product *product = ProductFactory::createProduct(stringToProduct(data[2]), std::stod(data[3]), PRODUCT_QUALITY::NEW, data[0], data[1]);
+        productsForSale.push_back(product);
+    }
+    product_data.close();
+
+
+
+
+    std::cout << buyers.size() << std::endl;
+    std::cout << sellers.size() << std::endl;
+    std::cout << bids.size() << std::endl;
+    std::cout << productsForSale.size() << std::endl;
 
 }
 

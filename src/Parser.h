@@ -11,14 +11,16 @@
 class Parser {
 public:
   Parser();
-  parseBids(std::string csvFile) {
+  std::vector<Bid*> parseBids(std::string csvFile) {
     std::ifstream file(csvFile);
     if (!file) {
       throw std::runtime_error("Failed to open file, parser parseBids");
     }
 
+
+
     std::string line;
-    vector<Bid> bids;
+    vector<Bid*> bids;
 
     while (std::getline(file, line)) {
       std::stringstream ss(line);
@@ -30,7 +32,7 @@ public:
       PRODUCT_TYPE product_type;
       double bid_price;
 
-      while (std::getline(ss, token, ',') {
+      while (std::getline(ss, token, ',')) {
         if (counter >= 4) throw std::runtime_error("Failed to parse file, parser parseBids");
         switch (counter) {
           case 0:
@@ -51,7 +53,7 @@ public:
         }
         counter++;
       }
-      bids.push_back(Bid(username, password, product_type, bid_price));
+      bids.push_back(new Bid(username, password, product_type, bid_price));
       counter = 0;
     }
     
