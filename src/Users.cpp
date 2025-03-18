@@ -21,17 +21,17 @@ void User::updateAccountInformation() {
         std::cin >> input;
 
         if (input == "1") {
-          std::cout << "Please enter the new address.\n";
-          std::cin >> input;
-          address_ = input;
+            std::cout << "Please enter the new address.\n";
+            std::cin >> input;
+            address_ = input;
         }
         else if (input == "2") {
-          std::cout << "Please enter the new phone number.\n";
-          std::cin >> input;
-          phone_no_ = input; // maybe sanatize this input latter
+            std::cout << "Please enter the new phone number.\n";
+            std::cin >> input;
+            phone_no_ = input; // maybe sanatize this input latter
         }
         else {
-          std::cout << "Please enter a valid input.\n";
+            std::cout << "Please enter a valid input.\n";
         }
     }
 
