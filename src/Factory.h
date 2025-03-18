@@ -1,15 +1,10 @@
 #ifndef FACTORY_H
 #define FACTORY_H
-
 #include "Product.h"
 #include <string>
 #include <memory>
 
-// Product types enum
-enum PRODUCT_TYPE {
-    ELECTRONICS_PHONE,
-    MEDIA_AUDIOBOOK
-};
+
 
 // Factory class
 class ProductFactory {

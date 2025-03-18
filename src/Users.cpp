@@ -1,3 +1,4 @@
+#include "Bid.h"
 #include "Driver.h"
 #include "Manager.h"
 #include "Users.h"
@@ -12,17 +13,16 @@ void User::updateAccountInformation() {
 
     // Some user input if 1 -> ask for new address -> call set address
     // Some user input if 2 -> ask for new phone number -> call set phone number
-
-    
-
 }
 
 
 
 
-
-
 // SELLER METHODS
+void Seller::notify() {
+    std::cout << "Notifying seller.\n";
+}
+
 void Seller::history() {
     std::cout << "Displaying seller history.\n";
 }
@@ -45,6 +45,9 @@ void Seller::closeBidforProduct() {
 
 
 // BUYER METHOD
+void Buyer::notify() {
+    std::cout << "Notifying buyer.\n";
+}
 
 void Buyer::history() {
     std::cout << "Displaying seller history.\n";

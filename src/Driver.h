@@ -23,7 +23,7 @@ class Driver {
         
 
         void storeFront();
-        void load();
+        void Load();
 
     private:
         static Driver* instance;

@@ -3,19 +3,28 @@
 #include <string>
 #include <ostream>
 #include <iostream>
+#include <map>
+
 
 enum PRODUCT_QUALITY {NEW, USED_VERY_GOOD, USED_GOOD, USED_OKAY};
+enum PRODUCT_TYPE { ELECTRONICS_PHONE, MEDIA_AUDIOBOOK};
+
+
 
 // Base
 class Product {
     public:
         Product(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
         : base_price(base_price), product_quality(product_quality), username(username), password(password) {}
+
+        bool getOpenBid() { return is_open_bid; };
+        void setOpenBid(const bool is_open_bid) { this->is_open_bid = is_open_bid; };
     private:
         double base_price;
         PRODUCT_QUALITY product_quality;
         std::string username;
         std::string password;
+        bool is_open_bid = false;
 };
 
 

@@ -1,14 +1,31 @@
 #include "Driver.h"
 #include "Manager.h"
 #include "Users.h"
+#include "Bid.h"
+#include "Product.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <limits>
 #include <string>
 
+
 Driver* Driver::instance = nullptr;
 Manager* Driver::manager = nullptr; 
+
+std::map<std::string, PRODUCT_TYPE> productMap = {
+    {"ELECTRONICS_PHONE", PRODUCT_TYPE::ELECTRONICS_PHONE}
+};
+
+PRODUCT_TYPE stringToProduct(const std::string& str) {
+    auto it = productMap.find(str);
+    if (it != productMap.end()) {
+        return it->second;
+    }
+    throw std::invalid_argument("Invalid color string: " + str);
+}
+
+
 
 // Helper function to split csv with delimiter (",")
 std::vector<std::string> split(std::string& s, const std::string& delimiter) {
@@ -27,12 +44,14 @@ std::vector<std::string> split(std::string& s, const std::string& delimiter) {
 }
 
 
+
+
 Driver::Driver() {
     manager = Manager::getInstance();
 }
 
 void Driver::Run() {
-    load();
+    Load();
 
     int input = 0;
     do {
@@ -63,7 +82,7 @@ void Driver::Run() {
     activeUser->dashboard(); // -> handle the next phase stuff here?
 }
 
-void Driver::load() {
+void Driver::Load() {
     /*
         I believe this method properly stores all accounts in the appropriate vectors in the
         meantime
@@ -105,6 +124,29 @@ void Driver::load() {
         sellers.push_back(seller);
     }
     seller_data.close();
+
+
+    // Bids
+    std::ifstream bid_data("data/bids.csv");
+    if (!bid_data.is_open()) {
+        std::cout << "Error opening bid file" << std::endl;
+        return;
+    }
+    std::getline(seller_data, row); // Skip first line with columns
+
+    while (std::getline(seller_data, row)) {
+        std::vector<std::string> data = split(row, ",");
+        Bid *bid = new Bid(data[0], data[1], stringToProduct(data[2]), std::stod(data[3]));
+        for (const auto &b : buyers){
+            if (b->getUsername() == data[0] && b->checkPassword(data[1])){
+                b->addToBids(bid);
+            }
+        }
+        bids.push_back(bid);
+    }
+    bid_data.close();
+    
+
 }
 
 void Driver::Login(){

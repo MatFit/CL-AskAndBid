@@ -19,7 +19,7 @@ class User {
 
         virtual ~User();
 
-        
+        virtual void notify() = 0;    
         virtual void history() = 0; // Resolves undefined references
         virtual void dashboard() = 0; // Resolves undefined references
 
@@ -59,9 +59,10 @@ class Seller : public User {
         // Override Methods
         void history() override;
         void dashboard() override;
+        void notify() override;
 
+        bool checkPassword(const std::string input) { return password_ == input; }
 
- 
         friend std::ostream& operator<<(std::ostream& os, const Seller &Seller){
             os << "              | Username : " << Seller.username_ << std::endl;
             os << "  Seller Info | Phone Number : " << Seller.phone_no_ << std::endl;
@@ -70,7 +71,7 @@ class Seller : public User {
             return os;
         }
     private:
-        std::vector<int> activeProductsforSale; // Temp datatype, will be Products
+        std::vector<Product*> activeProductsforSale; // Temp datatype, will be Products
         
 };
 
@@ -89,7 +90,10 @@ class Buyer : public User {
         // Override Methods
         void history() override;
         void dashboard() override;
+        void notify() override;
         
+        bool checkPassword(const std::string input) { return password_ == input; }
+        void addToBids(Bid* bid) { activeBids.push_back(bid); }
 
         friend std::ostream& operator<<(std::ostream& os, const Buyer &Buyer){
             os << "              | Username : " << Buyer.username_ << std::endl;
