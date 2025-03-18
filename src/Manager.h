@@ -1,22 +1,24 @@
 #ifndef MANAGER_H
 #define MANAGER_H
+#include <vector>
+#include <string>
+#include "Bid.h"
+#include "Product.h"
 
-class Manager{
+enum ACCOUNT_TYPE { BUYER, SELLER };
+
+class Manager {
     public:
         static Manager* getInstance() {
-            if (instance == nullptr) {
-                instance = new Manager();
-            }
+            if (!instance) instance = new Manager();
             return instance;
         }
         
-        void matchBids();
-        void notifyActiveUser();
-
+        void matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale);
+        void notifyUser(std::string username, std::string password, ACCOUNT_TYPE account_type);
     private:
         static Manager* instance;
         Manager();
 };
 
-
-#endif
+#endif  // MANAGER_H

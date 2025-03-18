@@ -26,6 +26,7 @@ class User {
         void updateAccountInformation();
         double getAccountBalance() const { return account_balance_; }
         std::string getUsername() { return username_; }
+        bool checkPassword(const std::string input) { return password_ == input; }
 
     protected:
         std::string username_;
@@ -71,8 +72,7 @@ class Seller : public User {
             return os;
         }
     private:
-        std::vector<Product*> activeProductsforSale; // Temp datatype, will be Products
-        
+        std::vector<Product> boughtProducts;
 };
 
 
@@ -85,15 +85,13 @@ class Buyer : public User {
 
 
         void findProductsForSale(); // Finds product if bid is active for it
-        void placeBidforProduct(); // places bid on P product
+        void placeBidforProduct(); // places bid goes over to the vector in the Driver class
 
         // Override Methods
         void history() override;
         void dashboard() override;
         void notify() override;
         
-        bool checkPassword(const std::string input) { return password_ == input; }
-        void addToBids(Bid* bid) { activeBids.push_back(bid); }
 
         friend std::ostream& operator<<(std::ostream& os, const Buyer &Buyer){
             os << "              | Username : " << Buyer.username_ << std::endl;
@@ -102,8 +100,6 @@ class Buyer : public User {
 
             return os;
         }
-    private:
-        std::vector<Bid*> activeBids; // temp rn, will be Bids
 };
 
 #endif

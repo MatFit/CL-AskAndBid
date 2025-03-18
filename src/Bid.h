@@ -10,6 +10,11 @@ class Bid {
         password(password),
         product_type(product_type),
         bid_price(bid_price) {}
+
+
+        std::string getUsername() { return username; }
+        std::string getPassword() { return password; }
+        double getBidPrice() { return bid_price; }
     private:
         std::string username;
         std::string password;
