@@ -74,11 +74,11 @@ void Buyer::notify() {
 }
 
 void Buyer::history() {
-    std::cout << "Displaying seller history.\n";
+    std::cout << "Displaying buyer history.\n";
 }
 
 void Buyer::dashboard() {
-    std::cout << "Showing seller dashboard.\n";
+    std::cout << "Showing buyer dashboard.\n";
 }
 
 void Buyer::findProductsForSale() {

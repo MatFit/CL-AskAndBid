@@ -137,11 +137,6 @@ void Driver::Load() {
     while (std::getline(seller_data, row)) {
         std::vector<std::string> data = split(row, ",");
         Bid *bid = new Bid(data[0], data[1], stringToProduct(data[2]), std::stod(data[3]));
-        for (const auto &b : buyers){
-            if (b->getUsername() == data[0] && b->checkPassword(data[1])){
-                b->addToBids(bid);
-            }
-        }
         bids.push_back(bid);
     }
     bid_data.close();

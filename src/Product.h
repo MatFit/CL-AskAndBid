@@ -19,6 +19,10 @@ class Product {
 
         bool getOpenBid() { return is_open_bid; };
         void setOpenBid(const bool is_open_bid) { this->is_open_bid = is_open_bid; };
+        double getProductPrice() { return base_price; }
+        std::string getUsername() { return username; }
+        std::string getPassword() { return password; }
+
     private:
         double base_price;
         PRODUCT_QUALITY product_quality;

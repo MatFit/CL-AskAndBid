@@ -15,6 +15,9 @@ class Driver {
             }
             return instance;
         };
+        std::vector<Seller*>& getSellers() { return sellers; }
+        std::vector<Buyer*>& getBuyers() { return buyers; }
+
 
 
         void Run();
