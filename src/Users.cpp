@@ -7,12 +7,36 @@ User::~User() {} // Undefined referance to v-table
 
 
 void User::updateAccountInformation() {
-    std::cout << "Select Info to change.\n";
-    std::cout << "1) Address.\n";
-    std::cout << "2) Phone Number.\n";
+    std::string input = "";
 
     // Some user input if 1 -> ask for new address -> call set address
     // Some user input if 2 -> ask for new phone number -> call set phone number
+    while (input != "3") {
+
+        std::cout << "Select Info to change.\n";
+        std::cout << "1) Address.\n";
+        std::cout << "2) Phone Number.\n";
+        std::cout << "3) Exit.\n";
+
+        std::cin >> input;
+
+        if (input == "1") {
+          std::cout << "Please enter the new address.\n";
+          std::cin >> input;
+          address_ = input;
+        }
+        else if (input == "2") {
+          std::cout << "Please enter the new phone number.\n";
+          std::cin >> input;
+          phone_no_ = input; // maybe sanatize this input latter
+        }
+        else {
+          std::cout << "Please enter a valid input.\n";
+        }
+    }
+
+    return;
+
 }
 
 
