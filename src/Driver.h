@@ -31,10 +31,11 @@ class Driver {
         void Run();
         void Login();
         void CreateAccount();
+        void Load();
+        void Commit();
         
 
         void storeFront();
-        void Load();
 
     private:
         static Driver* instance;

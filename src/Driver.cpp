@@ -46,7 +46,6 @@ std::vector<std::string> split(std::string& s, const std::string& delimiter) {
 
 
 
-
 Driver::Driver() {
     manager = Manager::getInstance();
 }
@@ -169,6 +168,10 @@ void Driver::Load() {
     std::cout << sellers.size() << std::endl;
     std::cout << bids.size() << std::endl;
     std::cout << productsForSale.size() << std::endl;
+
+}
+
+void Driver::Commit() {
 
 }
 
