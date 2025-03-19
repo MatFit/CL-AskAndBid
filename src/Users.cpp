@@ -53,6 +53,16 @@ void Seller::history() {
 
 void Seller::dashboard() {
     std::cout << "Showing seller dashboard.\n";
+    /*
+        List out options of what they can do:
+        - View Products
+        - Place bid
+        - Check Account balance (Tibbles)
+        - Update user Info (Tibbles)
+        - Get an overview of the bids they have placed
+        - View the history of products they have bought
+
+    */
 }
 
 void Seller::productOverview() {
@@ -79,6 +89,16 @@ void Buyer::history() {
 
 void Buyer::dashboard() {
     std::cout << "Showing buyer dashboard.\n";
+    /*
+        List out options of what they can do:
+        - View Products
+        - Place bid
+        - Check Account balance (Tibbles)
+        - Update user Info (Tibbles)
+        - Get an overview of the bids they have placed
+        - View the history of products they have bought
+
+    */
 }
 
 void Buyer::findProductsForSale() {
