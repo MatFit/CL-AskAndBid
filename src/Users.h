@@ -71,8 +71,6 @@ class Seller : public User {
 
             return os;
         }
-    private:
-        std::vector<Product> boughtProducts;
 };
 
 
@@ -100,6 +98,8 @@ class Buyer : public User {
 
             return os;
         }
+    private:
+        std::vector<Product> boughtProducts;
 };
 
 #endif
