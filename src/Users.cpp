@@ -54,7 +54,8 @@ void Seller::dashboard() {
     do {
         std::cout << "1.) Check Account Balance" << std::endl;
         std::cout << "2.) Update User Information" << std::endl;
-        std::cout << "3.) Exit" << std::endl;
+        std::cout << "3.) Overview Your Products" << std::endl;
+        std::cout << "4.) Exit" << std::endl;
 
         std::cin >> input;
 
@@ -68,17 +69,28 @@ void Seller::dashboard() {
                 updateAccountInformation();
                 break;
             case 3:
+                productOverview();
+                break;
+            case 4:
                 exit = true;
                 break;
             default:
                 std::cout << "Invalid option" << std::endl;
         }
     } while (!exit);
+    std::cout << "ASDAS" << std::endl;
 
 }
 
 void Seller::productOverview() {
     std::cout << "Posting product for sale.\n";
+    std::vector<Product*> products = Driver::getInstance()->getProducts();
+
+    for (const auto &p : products){
+        if (p->getUsername() == this->username_ && this->checkPassword(p->getPassword())){
+            std::cout << *p << std::endl;
+        }
+    }
 }
 
 void Seller::openBidforProduct() {

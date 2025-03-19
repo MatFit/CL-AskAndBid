@@ -18,6 +18,8 @@ class Driver {
         };
         std::vector<Seller*>& getSellers() { return sellers; }
         std::vector<Buyer*>& getBuyers() { return buyers; }
+        std::vector<Bid*>& getBids() { return bids; }
+        std::vector<Product*>& getProducts() { return productsForSale; }
 
 
 

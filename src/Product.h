@@ -9,6 +9,15 @@
 enum PRODUCT_QUALITY {NEW, USED_VERY_GOOD, USED_GOOD, USED_OKAY};
 enum PRODUCT_TYPE { ELECTRONICS_PHONE, MEDIA_AUDIOBOOK};
 
+inline std::string qualityToString(PRODUCT_QUALITY quality) {
+    switch(quality) {
+        case NEW: return "New";
+        case USED_VERY_GOOD: return "Used - Very Good";
+        case USED_GOOD: return "Used - Good";
+        case USED_OKAY: return "Used - Okay";
+        default: return "Unknown";
+    }
+}
 
 
 // Base
@@ -22,6 +31,12 @@ class Product {
         double getProductPrice() { return base_price; }
         std::string getUsername() { return username; }
         std::string getPassword() { return password; }
+        PRODUCT_QUALITY getProductQuality() { return product_quality; }
+
+        // Overrideable method to adjust product string every call to operator<<
+        virtual std::string getClassName() const { return "Product"; }
+
+        friend std::ostream& operator<<(std::ostream& os, const Product& product);
 
     private:
         double base_price;
@@ -32,6 +47,18 @@ class Product {
 };
 
 
+inline std::ostream& operator<<(std::ostream& os, const Product& product) {
+    os << "------------------------------------------" << std::endl;
+    os << product.getClassName() << std::endl;
+    os << "     Username: " << product.username << std::endl;
+    os << "     Price: " << product.base_price << std::endl;
+    os << "     Quality: " << qualityToString(product.product_quality) << std::endl;
+    os << "     Is On Bid: " << (product.is_open_bid ? "Yes" : "No") << std::endl;
+    os << "------------------------------------------" << std::endl;
+
+    return os;
+}
+
 
 
 // 1st Layer
@@ -39,14 +66,17 @@ class Electronics : public Product {
     public:
         Electronics(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
         : Product(base_price, product_quality, username, password) {}
+
+        std::string getClassName() const override { return "Electronics"; }
 };
 
 class Phone : public Electronics {
     public:
         Phone(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
         : Electronics(base_price, product_quality, username, password) {}
-};
 
+        std::string getClassName() const override { return "Phone"; }
+};
 
 
 
@@ -55,6 +85,8 @@ class Media : public Product {
     public:
         Media(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
         : Product(base_price, product_quality, username, password) {}
+
+        std::string getClassName() const override { return "Media"; }
 };
 
 // MEDIA
@@ -62,6 +94,8 @@ class AudioBook : public Media {
     public:
         AudioBook(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
         : Media(base_price, product_quality, username, password) {}
+
+        std::string getClassName() const override { return "Audiobook"; }
 };
 
 
