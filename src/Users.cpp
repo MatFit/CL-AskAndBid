@@ -52,6 +52,7 @@ void Seller::dashboard() {
     int input;
 
     do {
+        std::cout << *this << std::endl;
         std::cout << "1.) Check Account Balance" << std::endl;
         std::cout << "2.) Update User Information" << std::endl;
         std::cout << "3.) Overview Your Products" << std::endl;
@@ -144,7 +145,9 @@ void Buyer::dashboard() {
     bool exit = false;
     int input;
 
+
     do {
+        std::cout << this << std::endl;
         std::cout << "1.) Check Account Balance" << std::endl;
         std::cout << "2.) Update User Information" << std::endl;
         std::cout << "3.) Exit" << std::endl;

@@ -79,7 +79,7 @@ void Driver::Run() {
         return;
     }
 
-    std::cout << *activeUser << std::endl;
+    
     activeUser->dashboard(); // -> handle the next phase stuff here?
 }
 
