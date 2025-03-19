@@ -99,7 +99,8 @@ class Buyer : public User {
             return os;
         }
     private:
-        std::vector<Product> boughtProducts;
+        std::vector<Product*> boughtProducts;
+        // std::vector<Product*> boughtProducts = {new Phone(23, PRODUCT_QUALITY::NEW, "tenp", "teasdasd")}; was test this
 };
 
 #endif

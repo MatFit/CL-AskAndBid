@@ -212,7 +212,7 @@ void Buyer::listProductsForSale() {
 
 void Buyer::listBoughtItems() {
     for (auto &b : boughtProducts){
-        std::cout << b.getClassName() << " for " << b.getProductPrice() << std::endl;
+        std::cout << b->getClassName() << " for " << b->getProductPrice() << std::endl;
     }
 }
 
