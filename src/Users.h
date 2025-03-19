@@ -81,7 +81,7 @@ class Buyer : public User {
     : User(username_, password_, address_, phone_no_, account_balance_) {}
 
 
-        void findProductsForSale(); // Finds product if bid is active for it
+        void listProductsForSale(); // Finds product if bid is active for it
         void placeBidforProduct(); // places bid goes over to the vector in the Driver class
 
         // Override Methods

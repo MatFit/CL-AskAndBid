@@ -147,10 +147,12 @@ void Buyer::dashboard() {
 
 
     do {
-        std::cout << this << std::endl;
+        std::cout << *this << std::endl;
         std::cout << "1.) Check Account Balance" << std::endl;
         std::cout << "2.) Update User Information" << std::endl;
-        std::cout << "3.) Exit" << std::endl;
+        std::cout << "3.) View Products for Sale" << std::endl;
+        std::cout << "4.) Place a bid" << std::endl;
+        std::cout << "5.) Exit" << std::endl;
         std::cin >> input; 
 
         switch (input) { 
@@ -163,6 +165,12 @@ void Buyer::dashboard() {
                 updateAccountInformation();
                 break;
             case 3:
+                listProductsForSale();
+                break;
+            case 4:
+                placeBidforProduct();
+                break;
+            case 5:
                 exit = true;
                 break;
             default:
@@ -184,9 +192,16 @@ void Buyer::dashboard() {
 
     */
 }
+void Buyer::listProductsForSale() {
+    std::cout << "PRODUCT STORE \n" << std::endl;
+    std::vector<Product*> products = Driver::getInstance()->getProducts();
 
-void Buyer::findProductsForSale() {
-    std::cout << "Finding products for sale.\n";
+    for (const auto &p : products){
+        std::cout << *p << std::endl;
+        std::cout << std::endl;
+        std::cout << std::endl;
+        
+    }
 }
 
 void Buyer::placeBidforProduct() {

@@ -15,7 +15,7 @@ void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& products
 
     for (int i = 0; i < bid_size; ++i) {
         for (int j = 0; j < productsForSale_size; ++j) {
-            if (bids[i]->getBidPrice() == productsForSale[j]->getProductPrice()) {
+            if (bids[i]->getBidPrice() == productsForSale[j]->getProductPrice() && productsForSale[j]->getOpenBid()) {
                 notifyUser(bids[i]->getUsername(), bids[i]->getPassword(), BUYER);
                 notifyUser(productsForSale[j]->getUsername(), productsForSale[j]->getPassword(), SELLER);
             }
