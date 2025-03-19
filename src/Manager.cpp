@@ -5,9 +5,7 @@
 
 Manager* Manager::instance = nullptr;
 
-Manager::Manager() {
-    std::cout << "bidding big" << std::endl;
-}
+Manager::Manager() {}
 
 void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale) {
     int bid_size = bids.size();

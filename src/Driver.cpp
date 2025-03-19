@@ -194,21 +194,11 @@ void Driver::Login(){
 
 
 
-    // File name
-    std::string filename;
-    if (account_type == 1){ filename = "data/buyer_data.csv"; }
-    else { filename = "data/seller_data.csv"; }
-
-    
-    std::ifstream file(filename);
-    if(!file.is_open()){ 
-        std::cout << "Error opening file for Login" << std::endl; 
-        return;
-    }
-
 
     std::string input_username, input_password;
     int attempts = 3;
+    bool found = false;
+    
 
     do {
         std::cout << "Username : ";
@@ -219,17 +209,25 @@ void Driver::Login(){
 
 
 
-        std::string row;
-        std::string delimiter = ",";
-        bool found = false;
-        
-        while (std::getline(file, row)) {
-            std::vector<std::string> data = split(row, delimiter);
+        if (account_type == 1){
+            for (const auto &b : buyers) {
+                if (b->getUsername() == input_username && b->checkPassword(input_password)) {
+                    std::cout << "Account found!" << std::endl;
+                    activeUser = b;
+                    found = true;
+                    break;
+                }
+            }
+        }
 
-            if (data[0] == input_username && data[1] == input_password) {
-                std::cout << "account found" << std::endl;
-                found = true;
-                break;
+        if (account_type == 2){
+            for (const auto &s : sellers) {
+                if (s->getUsername() == input_username && s->checkPassword(input_password)) {
+                    std::cout << "Account found!" << std::endl;
+                    activeUser = s;
+                    found = true;
+                    break;
+                }
             }
         }
 
@@ -238,30 +236,13 @@ void Driver::Login(){
             attempts -= 1; 
         }
         else { break; }
+        
 
     } while(attempts > 0);
 
     if (attempts <= 0) {
         std::cout << "Maximum attempts reached." << std::endl;
         return;
-    }
-    
-
-
-
-    if (account_type == 1) { 
-        for (const auto &b : buyers){
-            if (b->getUsername() == input_username){
-                activeUser = b;
-            }
-        }
-    }
-    else if (account_type == 2){
-        for (const auto &s : sellers){
-            if (s->getUsername() == input_username){
-                activeUser = s;
-            }
-        }
     }
 
     if (activeUser == nullptr) {
