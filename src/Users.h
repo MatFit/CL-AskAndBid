@@ -83,6 +83,7 @@ class Buyer : public User {
 
         void listProductsForSale(); // Finds product if bid is active for it
         void placeBidforProduct(); // places bid goes over to the vector in the Driver class
+        void listBoughtItems();
 
         // Override Methods
         void history() override;

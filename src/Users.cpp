@@ -152,9 +152,10 @@ void Buyer::dashboard() {
         std::cout << *this << std::endl;
         std::cout << "1.) Check Account Balance" << std::endl;
         std::cout << "2.) Update User Information" << std::endl;
-        std::cout << "3.) View Products for Sale" << std::endl;
-        std::cout << "4.) Place a bid" << std::endl;
-        std::cout << "5.) Exit" << std::endl;
+        std::cout << "3.) View Bought Items" << std::endl;
+        std::cout << "4.) View Products for Sale" << std::endl;
+        std::cout << "5.) Place a bid" << std::endl;
+        std::cout << "6.) Exit" << std::endl;
         std::cin >> input; 
 
         switch (input) { 
@@ -167,12 +168,15 @@ void Buyer::dashboard() {
                 updateAccountInformation();
                 break;
             case 3:
-                listProductsForSale();
+                listBoughtItems();
                 break;
             case 4:
-                placeBidforProduct();
+                listProductsForSale();
                 break;
             case 5:
+                placeBidforProduct();
+                break;
+            case 6:
                 exit = true;
                 break;
             default:
@@ -203,6 +207,12 @@ void Buyer::listProductsForSale() {
         std::cout << std::endl;
         std::cout << std::endl;
         
+    }
+}
+
+void Buyer::listBoughtItems() {
+    for (auto &b : boughtProducts){
+        std::cout << b.getClassName() << " for " << b.getProductPrice() << std::endl;
     }
 }
 
