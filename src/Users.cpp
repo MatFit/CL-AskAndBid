@@ -2,6 +2,8 @@
 #include "Driver.h"
 #include "Manager.h"
 #include "Users.h"
+#include "Factory.h"
+#include <limits>
 
 User::~User() {} // Undefined referance to v-table
 
@@ -205,5 +207,42 @@ void Buyer::listProductsForSale() {
 }
 
 void Buyer::placeBidforProduct() {
-    std::cout << "Place bid for a product.\n";
+    bool exit = false;
+    PRODUCT_TYPE product_type;
+    double bid_price;
+    int input;
+
+    do {
+        std::cout << "Place bid for a product."  << std::endl;
+        std::cout << "Item to place on bid: " << std::endl;
+        std::cout << "1.) Phone " << std::endl;
+        std::cout << "2.) Audiobook " << std::endl;
+        std::cin >> input;
+    
+
+        switch (input) {
+            case 1:
+                product_type = PRODUCT_TYPE::ELECTRONICS_PHONE;
+                exit = true;
+                break;
+            case 2:
+                product_type = PRODUCT_TYPE::MEDIA_AUDIOBOOK;
+                exit = true;
+                break;
+            default:
+                std::cout << "Invalid Option" << std::endl;
+        }
+    } while(!exit);
+
+
+
+    do {
+        std::cout << "Bid Price: " << std::endl;
+        if (std::cin >> bid_price && bid_price > 0) exit = true;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        
+    } while(!exit);
+
+    Driver::getInstance()->addBid(username_, password_, product_type, bid_price);
 }
