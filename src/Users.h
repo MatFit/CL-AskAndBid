@@ -54,8 +54,7 @@ class Seller : public User {
         : User(username_, password_, address_, phone_no_, account_balance_) {}
 
         void productOverview(); // Sold or yet to be sold
-        void openBidforProduct();
-        void closeBidforProduct();
+        void adjustBidsforProducts();
 
         // Override Methods
         void history() override;

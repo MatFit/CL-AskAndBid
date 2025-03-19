@@ -55,7 +55,8 @@ void Seller::dashboard() {
         std::cout << "1.) Check Account Balance" << std::endl;
         std::cout << "2.) Update User Information" << std::endl;
         std::cout << "3.) Overview Your Products" << std::endl;
-        std::cout << "4.) Exit" << std::endl;
+        std::cout << "4.) Adjust bids for products" << std::endl;
+        std::cout << "5.) Exit" << std::endl;
 
         std::cin >> input;
 
@@ -72,6 +73,9 @@ void Seller::dashboard() {
                 productOverview();
                 break;
             case 4:
+                adjustBidsforProducts();
+                break;
+            case 5:
                 exit = true;
                 break;
             default:
@@ -93,12 +97,37 @@ void Seller::productOverview() {
     }
 }
 
-void Seller::openBidforProduct() {
-    std::cout << "Opening bid for a product.\n";
-}
+void Seller::adjustBidsforProducts() {
+    int input;
+    std::vector<Product*> products = Driver::getInstance()->getProducts();
 
-void Seller::closeBidforProduct() {
-    std::cout << "Closing bid for a product.\n";
+    for (const auto &p : products){
+        if (p->getUsername() == this->username_ && this->checkPassword(p->getPassword())){
+            
+            while (true) {
+                std::cout << *p << std::endl;
+                std::cout << "--------------------------------------" << std::endl;
+                std::cout << "Make Biddable? " << std::endl;
+                std::cout << "1.) Yes " << std::endl;
+                std::cout << "2.) No " << std::endl;
+                std::cin >> input;
+                
+                if (input == 1){
+                    p->setOpenBid(true);
+                    break;
+                }
+                else if (input == 2){
+                    p->setOpenBid(false);
+                    break;
+                }
+                else{
+                    std::cout << "Invalid choice youngin" << std::endl;
+                }
+            }
+
+
+        }
+    }
 }
 
 
