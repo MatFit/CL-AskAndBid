@@ -56,13 +56,13 @@ void Driver::Run() {
 
     int input = 0;
     do {
-        
+        std::cout << "--------------------------------------" << std::endl;
         std::cout << "Log In or Create Account: \n";
         std::cout << "1.) Log In \n";
         std::cout << "2.) Create Account \n";
         std::cin >> input;
+        std::cout << "--------------------------------------" << std::endl;
 
-        std::cout << "INPUT : " << input << std::endl;
 
         if (input != 1 && input != 2){ std::cout << "Please choose valid input" << std::endl; }
 
@@ -177,9 +177,11 @@ void Driver::Login(){
     // Account type login
     int account_type = 0;
     while (true) {
+        std::cout << "--------------------------------------" << std::endl;
         std::cout << "Log In Account Type? \n";
         std::cout << "1) Buyer\n";
         std::cout << "2) Seller\n";
+        std::cout << "--------------------------------------" << std::endl;
         if (std::cin >> account_type && (account_type == 1 || account_type == 2)) {
             break;
         }
@@ -276,9 +278,11 @@ void Driver::CreateAccount() {
 
     // Account type validation
     while (true) {
+        std::cout << "--------------------------------------" << std::endl;
         std::cout << "Enter Account Type:\n";
         std::cout << "1) Buyer\n";
         std::cout << "2) Seller\n";
+        std::cout << "--------------------------------------" << std::endl;
         if (std::cin >> account_type && (account_type == 1 || account_type == 2)) {
             break;
         }

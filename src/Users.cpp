@@ -7,36 +7,32 @@ User::~User() {} // Undefined referance to v-table
 
 
 void User::updateAccountInformation() {
-    std::string input = "";
+    int input;
 
-    // Some user input if 1 -> ask for new address -> call set address
-    // Some user input if 2 -> ask for new phone number -> call set phone number
-    while (input != "3") {
-
+    while (true) {
         std::cout << "Select Info to change.\n";
-        std::cout << "1) Address.\n";
-        std::cout << "2) Phone Number.\n";
-        std::cout << "3) Exit.\n";
+        std::cout << "1) Address\n";
+        std::cout << "2) Phone Number\n";
+        std::cout << "3) Exit\n";
 
         std::cin >> input;
 
-        if (input == "1") {
-            std::cout << "Please enter the new address.\n";
-            std::cin >> input;
-            address_ = input;
-        }
-        else if (input == "2") {
-            std::cout << "Please enter the new phone number.\n";
-            std::cin >> input;
-            phone_no_ = input; // maybe sanatize this input latter
-        }
-        else {
-            std::cout << "Please enter a valid input.\n";
+        switch (input) {
+            case 1:
+                std::cout << "Please enter the new address: ";
+                std::cin.ignore();
+                std::getline(std::cin, address_);
+                break;
+            case 2:
+                std::cout << "Please enter the new phone number: ";
+                std::cin >> phone_no_;
+                break;
+            case 3:
+                return;
+            default:
+                std::cout << "Invalid option. Please try again.\n";
         }
     }
-
-    return;
-
 }
 
 
@@ -52,17 +48,33 @@ void Seller::history() {
 }
 
 void Seller::dashboard() {
-    std::cout << "Showing seller dashboard.\n";
-    /*
-        List out options of what they can do:
-        - View Products
-        - Place bid
-        - Check Account balance (Tibbles)
-        - Update user Info (Tibbles)
-        - Get an overview of the bids they have placed
-        - View the history of products they have bought
+    bool exit = false;
+    int input;
 
-    */
+    do {
+        std::cout << "1.) Check Account Balance" << std::endl;
+        std::cout << "2.) Update User Information" << std::endl;
+        std::cout << "3.) Exit" << std::endl;
+
+        std::cin >> input;
+
+        switch (input) {
+            case 1:
+                std::cout << "--------------------------------------" << std::endl;
+                std::cout << "ACCOUT BALANCE: " << getAccountBalance() << std::endl;
+                std::cout << "--------------------------------------" << std::endl;
+                break;
+            case 2:
+                updateAccountInformation();
+                break;
+            case 3:
+                exit = true;
+                break;
+            default:
+                std::cout << "Invalid option" << std::endl;
+        }
+    } while (!exit);
+
 }
 
 void Seller::productOverview() {
@@ -88,7 +100,35 @@ void Buyer::history() {
 }
 
 void Buyer::dashboard() {
-    std::cout << "Showing buyer dashboard.\n";
+    bool exit = false;
+    int input;
+
+    do {
+        std::cout << "1.) Check Account Balance" << std::endl;
+        std::cout << "2.) Update User Information" << std::endl;
+        std::cout << "3.) Exit" << std::endl;
+        std::cin >> input; 
+
+        switch (input) { 
+            case 1:
+                std::cout << "--------------------------------------" << std::endl;
+                std::cout << "ACCOUT BALANCE: " << getAccountBalance() << std::endl;
+                std::cout << "--------------------------------------" << std::endl;
+                break;
+            case 2:
+                updateAccountInformation();
+                break;
+            case 3:
+                exit = true;
+                break;
+            default:
+                std::cout << "Invalid option" << std::endl;
+        }
+    } while (!exit);
+
+
+
+
     /*
         List out options of what they can do:
         - View Products
