@@ -44,7 +44,10 @@ void Seller::notify() {
 }
 
 void Seller::history() {
-    std::cout << "Displaying seller history.\n";
+    std::vector<std::string> temp = Driver::getInstance()->getSellerHistory();
+    for (const auto &t : temp){
+        std::cout << t << std::endl;
+    }
 }
 
 void Seller::dashboard() {
@@ -182,7 +185,10 @@ void Buyer::notify() {
 }
 
 void Buyer::history() {
-    std::cout << "Displaying buyer history.\n";
+    std::vector<std::string> temp = Driver::getInstance()->getBuyerHistory();
+    for (const auto &t : temp){
+        std::cout << t << std::endl;
+    }
 }
 
 void Buyer::dashboard() {
