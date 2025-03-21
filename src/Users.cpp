@@ -209,18 +209,13 @@ void Seller::placeProductforSale() {
         std::cout << count << ".) " << *p << std::endl;
     }
 
-    int input1;
+    int input;
 
     std::cout << "What product do you want to list: ";
-    cin >> input1;
+    cin >> input;
 
     if (input > 0 && input <= count) {
-        double input2;
-        std::cout << "How much do you want to list if for: ";
-        cin >> input2;
-        if (input2 > 0) {
-          // function for adding item to marketplace
-        }
+        Driver::getInstance()->addProductToSell(sellerProducts.at(input));
     }
 
 }

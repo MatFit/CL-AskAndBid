@@ -32,6 +32,9 @@ class Driver {
         void addBid(std::string username, std::string password, PRODUCT_TYPE product_type, double bid_price) { 
             bids.push_back(new Bid(username, password, product_type, bid_price)); 
         }
+        void addProductToSell(Product *product) {
+            productsForSale.push_back(product);  
+        }
 
 
         void Run();
