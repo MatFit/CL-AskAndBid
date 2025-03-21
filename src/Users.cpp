@@ -186,41 +186,78 @@ void Seller::adjustBidsforProducts() {
 }
 // TODO : GIVE SELLERS THE FEATURE TO PLACE THEIR PRODUCTS FOR SALE
 void Seller::placeProductforSale() {
-    std::vector<Product*> products = Driver::getInstance()->getProducts();
-    std::vector<Procut*> sellerProducts;
-  
-    for (size_t = 0; i < products.size(); i++) {
-        if (p->getUsername() == this->username_ && this->checkPassword(p->getPassword())) {
-            sellerProducts.push_back(products.at(i));
+    int input_product;
+    int input_quality;
+    double input_price;
+    
+    do {
+        std::cout << "What Product do you want to post?" << std::endl;
+        std::cout << "1.) Phone" << std::endl;
+        std::cout << "2.) Audiobook" << std::endl;
+        std::cout << "0.) Cancel" << std::endl;
+        std::cout << "Enter your choice: ";
+        std::cin >> input_product;
+        
+        if (input_product == 0) {
+            return;
         }
+        
+        if (input_product != 1 && input_product != 2) {
+            std::cout << "Invalid product choice. Please try again." << std::endl;
+            continue;
+        }
+        
+        std::cout << "What condition?" << std::endl;
+        std::cout << "0.) NEW" << std::endl;
+        std::cout << "1.) USED_VERY_GOOD" << std::endl;
+        std::cout << "2.) USED_GOOD" << std::endl;
+        std::cout << "3.) USED_OKAY" << std::endl;
+        std::cout << "Enter your choice: ";
+        std::cin >> input_quality;
+        
+        if (input_quality < 0 || input_quality > 3) {
+            std::cout << "Invalid quality choice. Please try again." << std::endl;
+            continue;
+        }
+        
+        std::cout << "Enter price: $";
+        std::cin >> input_price;
+        
+        if (input_price <= 0) {
+            std::cout << "Price must be greater than zero. Please try again." << std::endl;
+            continue;
+        }
+        
+        break;
+        
+    } while (true);
+    
+    
+    PRODUCT_TYPE type;
+    switch (input_product) {
+        case 1:
+            type = PRODUCT_TYPE::ELECTRONICS_PHONE;
+            break;
+        case 2:
+            type = PRODUCT_TYPE::MEDIA_AUDIOBOOK;
+            break;
+        default:
+            std::cout << "Invalid product type." << std::endl;
+            return;
     }
-
-    if (sellerProducts.size() == 0) {
-        std::cout << "You have no products for sale.\n";
-        return;
+    
+    // Static cast for int to convert to the enum quality by mapping
+    PRODUCT_QUALITY quality = static_cast<PRODUCT_QUALITY>(input_quality); // This saved the day
+    Product* newProduct = ProductFactory::createProduct(type, input_price, quality, username_, password_, true);
+    
+    if (newProduct) {
+        std::cout << "Product successfully placed for sale!" << std::endl;
+        std::cout << *newProduct << std::endl;
+        Driver::getInstance()->addProductToSell(newProduct);
+    } else {
+        std::cout << "Failed to create product. Please try again." << std::endl;
     }
-
-    int count = 0;
-
-    std::cout << "Your products:\n";
-    std::cout << "--------------------------------------" << std::endl;
-    for (const auto &p : sellerProducts) {
-        count++;
-        std::cout << count << ".) " << *p << std::endl;
-    }
-
-    int input;
-
-    std::cout << "What product do you want to list: ";
-    cin >> input;
-
-    if (input > 0 && input <= count) {
-        Driver::getInstance()->addProductToSell(sellerProducts.at(input));
-    }
-
 }
-
-
 
 
 
