@@ -15,6 +15,11 @@ class Bid {
         std::string getUsername() { return username; }
         std::string getPassword() { return password; }
         double getBidPrice() { return bid_price; }
+
+        friend std::ostream& operator<<(std::ostream& os, const Bid& bid) {
+            std::cout << "Product Type: " << bid.product_type << " Bid Amount: " << bid.bid_price;
+        };
+
     private:
         std::string username;
         std::string password;

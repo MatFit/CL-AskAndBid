@@ -197,7 +197,8 @@ void Buyer::dashboard() {
         std::cout << "3.) View Bought Items" << std::endl;
         std::cout << "4.) View Products for Sale" << std::endl;
         std::cout << "5.) Place a bid" << std::endl;
-        std::cout << "6.) Exit" << std::endl;
+        std::cout << "6.) View bids" << std::endl;
+        std::cout << "7.) Exit" << std::endl;
         std::cin >> input; 
 
         switch (input) { 
@@ -219,6 +220,9 @@ void Buyer::dashboard() {
                 placeBidforProduct();
                 break;
             case 6:
+                viewBids();
+                break;
+            case 7:
                 exit = true;
                 break;
             default:
@@ -297,4 +301,13 @@ void Buyer::placeBidforProduct() {
     } while(!exit);
 
     Driver::getInstance()->addBid(username_, password_, product_type, bid_price);
+}
+
+void Buyer::viewBids() {
+    std::vector<Bid*> bids = Driver::getInstance()->getBids();
+    for (const auto &b : bids) {
+        if (b->getUsername() == this->username_ && this->checkPassword(b->getPassword())) {
+            std::cout << *b << std::endl;
+        }
+    }
 }
