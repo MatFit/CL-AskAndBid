@@ -17,7 +17,8 @@ class Bid {
         double getBidPrice() { return bid_price; }
 
         friend std::ostream& operator<<(std::ostream& os, const Bid& bid) {
-            std::cout << "Product Type: " << bid.product_type << " Bid Amount: " << bid.bid_price;
+            os << "Product Type: " << bid.product_type << " Bid Amount: " << bid.bid_price;
+            return os;
         };
 
     private:
