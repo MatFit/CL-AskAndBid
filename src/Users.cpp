@@ -185,7 +185,44 @@ void Seller::adjustBidsforProducts() {
     }
 }
 // TODO : GIVE SELLERS THE FEATURE TO PLACE THEIR PRODUCTS FOR SALE
-void Seller::placeProductforSale(){
+void Seller::placeProductforSale() {
+    std::vector<Product*> products = Driver::getInstance()->getProducts();
+    std::vector<Procut*> sellerProducts;
+  
+    for (size_t = 0; i < products.size(); i++) {
+        if (p->getUsername() == this->username_ && this->checkPassword(p->getPassword())) {
+            sellerProducts.push_back(products.at(i));
+        }
+    }
+
+    if (sellerProducts.size() == 0) {
+        std::cout << "You have no products for sale.\n";
+        return;
+    }
+
+    int count = 0;
+
+    std::cout << "Your products:\n";
+    std::cout << "--------------------------------------" << std::endl;
+    for (const auto &p : sellerProducts) {
+        count++;
+        std::cout << count << ".) " << *p << std::endl;
+    }
+
+    int input1;
+
+    std::cout << "What product do you want to list: ";
+    cin >> input1;
+
+    if (input > 0 && input <= count) {
+        double input2;
+        std::cout << "How much do you want to list if for: ";
+        cin >> input2;
+        if (input2 > 0) {
+          // function for adding item to marketplace
+        }
+    }
+
 }
 
 
