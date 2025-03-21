@@ -82,6 +82,7 @@ void Seller::dashboard() {
                 adjustBidsforProducts();
                 break;
             case 5:
+                placeProductforSale();
                 break;
             case 6:
                 history();
@@ -183,7 +184,9 @@ void Seller::adjustBidsforProducts() {
         }
     }
 }
-
+// TODO : GIVE SELLERS THE FEATURE TO PLACE THEIR PRODUCTS FOR SALE
+void Seller::placeProductforSale(){
+}
 
 
 
