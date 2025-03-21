@@ -12,12 +12,9 @@
 
 
 Driver* Driver::instance = nullptr;
-Manager* Driver::manager = nullptr; 
 
 
-Driver::Driver() {
-    manager = Manager::getInstance();
-}
+Driver::Driver() {}
 
 void Driver::Run() {
     Load();
@@ -125,7 +122,7 @@ void Driver::Load() {
 
     while (std::getline(product_data, row)) {
         std::vector<std::string> data = Utils::split(row, ",");
-        Product *product = ProductFactory::createProduct(Utils::stringToProduct(data[2]), std::stod(data[3]), PRODUCT_QUALITY::NEW, data[0], data[1]);
+        Product *product = ProductFactory::createProduct(Utils::stringToProduct(data[2]), std::stod(data[3]), PRODUCT_QUALITY::NEW, data[0], data[1], std::stoi(data[4]));
         productsForSale.push_back(product);
     }
     product_data.close();
@@ -141,6 +138,7 @@ void Driver::Load() {
 }
 
 void Driver::Commit() {
+    // This method will be used to take all the vectors and rewrite our csvs so data is saved from each program iteration
 }
 
 void Driver::Login(){

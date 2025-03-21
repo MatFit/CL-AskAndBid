@@ -23,8 +23,8 @@ inline std::string qualityToString(PRODUCT_QUALITY quality) {
 // Base
 class Product {
     public:
-        Product(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
-        : base_price(base_price), product_quality(product_quality), username(username), password(password) {}
+        Product(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid) 
+        : base_price(base_price), product_quality(product_quality), username(username), password(password), is_open_bid(is_open_bid){}
 
         bool getOpenBid() { return is_open_bid; };
         void setOpenBid(const bool is_open_bid) { this->is_open_bid = is_open_bid; };
@@ -43,7 +43,7 @@ class Product {
         PRODUCT_QUALITY product_quality;
         std::string username;
         std::string password;
-        bool is_open_bid = false;
+        bool is_open_bid;
 };
 
 
@@ -64,16 +64,16 @@ inline std::ostream& operator<<(std::ostream& os, const Product& product) {
 // 1st Layer
 class Electronics : public Product {
     public:
-        Electronics(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
-        : Product(base_price, product_quality, username, password) {}
+        Electronics(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid) 
+        : Product(base_price, product_quality, username, password, is_open_bid) {}
 
         std::string getClassName() const override { return "Electronics"; }
 };
 
 class Phone : public Electronics {
     public:
-        Phone(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
-        : Electronics(base_price, product_quality, username, password) {}
+        Phone(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid) 
+        : Electronics(base_price, product_quality, username, password, is_open_bid) {}
 
         std::string getClassName() const override { return "Phone"; }
 };
@@ -83,8 +83,8 @@ class Phone : public Electronics {
 // 2nd Layer
 class Media : public Product {
     public:
-        Media(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
-        : Product(base_price, product_quality, username, password) {}
+        Media(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid) 
+        : Product(base_price, product_quality, username, password, is_open_bid) {}
 
         std::string getClassName() const override { return "Media"; }
 };
@@ -92,8 +92,8 @@ class Media : public Product {
 // MEDIA
 class AudioBook : public Media {
     public:
-        AudioBook(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password) 
-        : Media(base_price, product_quality, username, password) {}
+        AudioBook(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid) 
+        : Media(base_price, product_quality, username, password, is_open_bid) {}
 
         std::string getClassName() const override { return "Audiobook"; }
 };

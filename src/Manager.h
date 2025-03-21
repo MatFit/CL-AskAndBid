@@ -4,6 +4,7 @@
 #include <string>
 #include "Bid.h"
 #include "Product.h"
+#include "Users.h"
 
 enum ACCOUNT_TYPE { BUYER, SELLER };
 
@@ -14,9 +15,9 @@ class Manager {
             return instance;
         }
         
-        void matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale);
-        void notifyUser(std::string username, std::string password, ACCOUNT_TYPE account_type);
-        // void resolveBids(std::vector<Bid*> bids, std::vector<Product*>& productForSale);
+        void matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale, User* activeUser);
+        void transferFunds(Bid* bid, Product* product);
+        void addProductToBuyer(std::string username, std::string password, Product* product);
     private:
         static Manager* instance;
         Manager();

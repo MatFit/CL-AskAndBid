@@ -24,6 +24,7 @@ class User {
         virtual void dashboard() = 0; // Resolves undefined references
 
         void updateAccountInformation();
+        void setAccountBalance(double price) { account_balance_ += price; }
         double getAccountBalance() const { return account_balance_; }
         std::string getUsername() { return username_; }
         bool checkPassword(const std::string input) { return password_ == input; }
@@ -86,6 +87,7 @@ class Buyer : public User {
         void placeBidforProduct(); // places bid goes over to the vector in the Driver class
         void listBoughtItems();
         void viewBids();
+        void addPurchasedProduct(Product *product) { boughtProducts.push_back(product); }
 
         // Override Methods
         void history() override;
@@ -102,6 +104,7 @@ class Buyer : public User {
         }
     private:
         std::vector<Product*> boughtProducts;
+        
         // std::vector<Product*> boughtProducts = {new Phone(23, PRODUCT_QUALITY::NEW, "tenp", "teasdasd")}; was test this
 };
 

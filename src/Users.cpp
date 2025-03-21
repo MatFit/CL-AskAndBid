@@ -38,11 +38,9 @@ void User::updateAccountInformation() {
 }
 
 
-
-
 // SELLER METHODS
 void Seller::notify() {
-    std::cout << "Notifying seller.\n";
+    std::cout << "Dear " << username_ << ", your bid was successful! The product has been added to your purchases." << std::endl;
 }
 
 void Seller::history() {
@@ -84,6 +82,8 @@ void Seller::dashboard() {
             default:
                 std::cout << "Invalid option" << std::endl;
         }
+        Manager::getInstance()->matchBids(Driver::getInstance()->getBids(), Driver::getInstance()->getProducts(), this);
+        
     } while (!exit);
     std::cout << "ASDAS" << std::endl;
 
@@ -178,7 +178,7 @@ void Seller::adjustBidsforProducts() {
 
 // BUYER METHOD
 void Buyer::notify() {
-    std::cout << "Notifying buyer.\n";
+    std::cout << "Dear " << username_ << ", your bid was successful! The product has been added to your purchases." << std::endl;
 }
 
 void Buyer::history() {
@@ -228,21 +228,15 @@ void Buyer::dashboard() {
             default:
                 std::cout << "Invalid option" << std::endl;
         }
+        Manager::getInstance()->matchBids(Driver::getInstance()->getBids(), Driver::getInstance()->getProducts(), this);
+
+
+
     } while (!exit);
 
 
 
 
-    /*
-        List out options of what they can do:
-        - View Products
-        - Place bid
-        - Check Account balance (Tibbles)
-        - Update user Info (Tibbles)
-        - Get an overview of the bids they have placed
-        - View the history of products they have bought
-
-    */
 }
 void Buyer::listProductsForSale() {
     std::cout << "PRODUCT STORE \n" << std::endl;

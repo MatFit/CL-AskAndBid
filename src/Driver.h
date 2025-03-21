@@ -40,7 +40,6 @@ class Driver {
 
     private:
         static Driver* instance;
-        static Manager* manager;
         User* activeUser = nullptr;
 
         std::vector<Seller*> sellers;

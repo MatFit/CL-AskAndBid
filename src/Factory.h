@@ -8,7 +8,7 @@
 // Factory class
 class ProductFactory {
 public:
-    static Product* createProduct(PRODUCT_TYPE type, double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password);
+    static Product* createProduct(PRODUCT_TYPE type, double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_bid_open);
 
 private:
     ProductFactory() {} // Prevent instance of factory
