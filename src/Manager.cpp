@@ -2,6 +2,8 @@
 #include "Driver.h"
 #include "Users.h"
 #include <iostream>
+#include <algorithm>
+
 
 Manager* Manager::instance = nullptr;
 
@@ -43,6 +45,32 @@ void Manager::notifyUser(std::string username, std::string password, ACCOUNT_TYP
     }
 }
 
-void Manager::resolveBids(std::vector<Bid*> bids, std::vector<Product*>& productForSale) {
-    int test = -1;
+/**
+void Manager::resolveBids(std::vector<Bid*> bids, std::vector<Product*>& productForSale, std::vector<Product*>& sold) {
+    // sort bids based on the highest bid
+    std::sort(bids.begin(), bids.end());
+
+    // iterate through each product in the products for sale
+    for (auto& product : productForSale) {
+        double highestBidPrice = 0;
+        Bid* highestBid = nullptr;
+
+        // find the highest bid for this product
+        for (auto& bid : bids) {
+            if (bid->getProductType() == product->getProductType()) {
+                if (bid->getBidPrice() > highestBidPrice) {
+                    highestBidPrice = bid->getBidPrice();
+                    highestBid = bid;
+                }
+            }
+        }
+
+        // if the highest bid exists move the product to sold
+        if (highestBid != nullptr) {
+            sold.push_back(product);
+
+            productForSale.erase(std::remove(productForSale.begin(), productForSale.end(), product), productForSale.end());
+        }
+    }
 }
+*/

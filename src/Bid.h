@@ -21,6 +21,10 @@ class Bid {
             return os;
         };
 
+        friend bool operator<(const Bid& lhs, const Bid& rhs) {
+            return lhs.bid_price > rhs.bid_price;
+        };
+
     private:
         std::string username;
         std::string password;

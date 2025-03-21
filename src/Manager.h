@@ -16,7 +16,7 @@ class Manager {
         
         void matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale);
         void notifyUser(std::string username, std::string password, ACCOUNT_TYPE account_type);
-        void resolveBids(std::vector<Bid*> bids, std::vector<Product*>& productForSale);
+        // void resolveBids(std::vector<Bid*> bids, std::vector<Product*>& productForSale);
     private:
         static Manager* instance;
         Manager();
