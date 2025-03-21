@@ -153,12 +153,13 @@ void Driver::Load() {
 
 
 
-    std::cout << buyers.size() << std::endl;
-    std::cout << sellers.size() << std::endl;
-    std::cout << bids.size() << std::endl;
-    std::cout << productsForSale.size() << std::endl;
-    std::cout << sellerHistory.size() << std::endl;
-    std::cout << buyerHistory.size() << std::endl;
+    std::cout << "✅ Loaded Buyers from CSV | Size: " << buyers.size() << std::endl;
+    std::cout << "✅ Loaded Sellers from CSV | Size: " << sellers.size() << std::endl;
+    std::cout << "✅ Loaded Bids from CSV | Size: " << bids.size() << std::endl;
+    std::cout << "✅ Loaded Products for Sale from CSV | Size: " << productsForSale.size() << std::endl;
+    std::cout << "✅ Loaded Seller Transaction History | Size: " << sellerHistory.size() << std::endl;
+    std::cout << "✅ Loaded Buyer Transaction History | Size: " << buyerHistory.size() << std::endl;
+
 }
 
 void Driver::Commit() {
