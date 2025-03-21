@@ -305,9 +305,12 @@ void Buyer::placeBidforProduct() {
 
 void Buyer::viewBids() {
     std::vector<Bid*> bids = Driver::getInstance()->getBids();
+    std::cout << "--------------------------------------" << std::endl;
+    std::cout << "CURRENT BIDS: " << std::endl;
     for (const auto &b : bids) {
         if (b->getUsername() == this->username_ && this->checkPassword(b->getPassword())) {
             std::cout << *b << std::endl;
         }
     }
+    std::cout << "--------------------------------------" << std::endl;
 }
