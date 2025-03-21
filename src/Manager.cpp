@@ -22,8 +22,14 @@ void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& products
                 // Add product to buyer's purchased items
                 addProductToBuyer(bid->getUsername(), bid->getPassword(), product);
                 
-                // Notify both parties
+                // Notify
                 activeUser->notify();
+
+                std::string buyerLog = "Buyer " + activeUser->getUsername() + " purchased " + Utils::productToString(product->getProductType());
+                std::string sellerLog = "Seller " + activeUser->getUsername() + " purchased " + Utils::productToString(product->getProductType());
+
+                Driver::getInstance()->addToBuyerHistory(buyerLog);
+                Driver::getInstance()->addToSellerHistory(sellerLog);
 
             }
         }
@@ -44,6 +50,7 @@ void Manager::transferFunds(Bid* bid, Product* product) {
                     // Update balances
                     buyer->setAccountBalance(buyerBalance - bid->getBidPrice());
                     seller->setAccountBalance(sellerBalance + bid->getBidPrice());
+                    
                     
                     return;
                 }

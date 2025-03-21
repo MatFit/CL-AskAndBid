@@ -21,8 +21,15 @@ class Driver {
         std::vector<Bid*>& getBids() { return bids; }
         std::vector<Product*>& getProducts() { return productsForSale; }
         std::vector<Product*>& getSold() { return sold; }
+        std::vector<std::string> getBuyerHistory() { return buyerHistory; }
+        std::vector<std::string> getSellerHistory() { return sellerHistory; }
 
-
+        void addToBuyerHistory(std::string log) { 
+            buyerHistory.push_back(log);
+        }
+        void addToSellerHistory(std::string log) { 
+            sellerHistory.push_back(log);
+        }
         void addBid(std::string username, std::string password, PRODUCT_TYPE product_type, double bid_price) { 
             bids.push_back(new Bid(username, password, product_type, bid_price)); 
         }
@@ -47,6 +54,8 @@ class Driver {
         // Manager class will handle and notify
         std::vector<Bid*> bids;
         std::vector<Product*> productsForSale;
+        std::vector<std::string> buyerHistory;
+        std::vector<std::string> sellerHistory;
         std::vector<Product*> sold;
 
         Driver();
