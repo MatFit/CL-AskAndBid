@@ -55,6 +55,7 @@ class Seller : public User {
 
         void productOverview(); // Sold or yet to be sold
         void adjustBidsforProducts();
+        void bidHistory();
 
         // Override Methods
         void history() override;

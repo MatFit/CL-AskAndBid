@@ -100,6 +100,48 @@ void Seller::productOverview() {
     }
 }
 
+// Curently not fully working because of no sell history
+void Seller::bidHistory() {
+    std::cout << "Your products.\n";
+    std::vector<Product*> products = Driver::getInstance()->getProducts();
+    int productCount = 1;
+    bool exit = false;
+    int input;
+
+    while (exit == false) {
+        std::cout << "Select product to view the bid history of.\n";
+
+        for (const auto &p : products) {
+            if (p->getUsername() == this->username_ && this->checkPassword(p->getPassword())) {
+                std::cout << productCount << ".) " << *p << std::endl;
+                productCount++;
+            }
+        }
+
+        std::cin >> input;
+
+        if (input > 0 && input <= productCount) {
+            int check_count = 1;
+            for (const auto &p : products) {
+                if (p->getUsername() == this->username_ && this->checkPassword(p->getPassword())) {
+                    if (check_count == productCount) {
+                        std::cout << "Work in progress, sell history unavailable for products atm\n";
+                        exit = true;
+                    }
+                    else {
+                        check_count++;
+                    }
+                }
+            }
+            std::cout << "Critical error in bidHistory()\n";
+        }
+        else {
+            std::cout << "Please enter a valid input\n";
+        }
+    }
+
+}
+
 void Seller::adjustBidsforProducts() {
     int input;
     std::vector<Product*> products = Driver::getInstance()->getProducts();
