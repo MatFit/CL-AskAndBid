@@ -26,16 +26,16 @@ void Driver::Run() {
         std::cout << "1.) Log In \n";
         std::cout << "2.) Create Account \n";
         std::cin >> input;
-        std::cout << "--------------------------------------" << std::endl;
 
 
         if (input != 1 && input != 2){ std::cout << "Please choose valid input" << std::endl; }
 
     } while (input != 1 && input != 2);
 
+    std::cout << "\n\n\n";
     if (input == 1){ Login(); }
     else { CreateAccount(); }
-
+    std::cout << "\n\n\n";
 
     storeFront();
 
@@ -46,6 +46,8 @@ void Driver::Run() {
 
     
     activeUser->dashboard(); // -> handle the next phase stuff here?
+
+    Commit(); // Once user exits their dashboard this method is responsible to rewrite data back into the csv's
 }
 
 void Driver::Load() {
@@ -171,7 +173,6 @@ void Driver::Login(){
     // Account type login
     int account_type = 0;
     while (true) {
-        std::cout << "--------------------------------------" << std::endl;
         std::cout << "Log In Account Type? \n";
         std::cout << "1) Buyer\n";
         std::cout << "2) Seller\n";
@@ -253,7 +254,6 @@ void Driver::CreateAccount() {
 
     // Account type validation
     while (true) {
-        std::cout << "--------------------------------------" << std::endl;
         std::cout << "Enter Account Type:\n";
         std::cout << "1) Buyer\n";
         std::cout << "2) Seller\n";
