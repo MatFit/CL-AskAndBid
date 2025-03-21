@@ -42,3 +42,7 @@ void Manager::notifyUser(std::string username, std::string password, ACCOUNT_TYP
         }
     }
 }
+
+void Manager::resolveBids(std::vector<Bid*> bids, std::vector<Product*>& productForSale) {
+    int test = -1;
+}
