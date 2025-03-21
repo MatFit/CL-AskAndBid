@@ -38,7 +38,6 @@ void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& products
     }
 }
 
-
 void Manager::transferFunds(Bid* bid, Product* product) {
     for (auto buyer : Driver::getInstance()->getBuyers()) {
         if (buyer->getUsername() == bid->getUsername() && buyer->checkPassword(bid->getPassword())) {

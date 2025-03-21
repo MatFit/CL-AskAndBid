@@ -166,6 +166,7 @@ void Driver::Load() {
 
 void Driver::Commit() {
     // This method will be used to take all the vectors and rewrite our csvs so data is saved from each program iteration
+    
 }
 
 void Driver::Login(){
