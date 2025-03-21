@@ -9,6 +9,8 @@ Manager* Manager::instance = nullptr;
 
 Manager::Manager() {}
 
+
+// TODO : REMOVE BOTH BID AND PRODUCT AFTER SUCCESSFULL TRANSACTION, MAKE SURE VECTORS IN DRIVER CLASS ARE CHANGED
 void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale, User* activeUser) {
     // We love auto
     for (auto bid : bids) {

@@ -63,7 +63,6 @@ void Driver::Load() {
 
     std::string row;
     std::string data;
-    std::getline(buyer_data, row); // Skip first line with columns
 
     while (std::getline(buyer_data, row)) {
         std::vector<std::string> data = Utils::split(row, ",");
@@ -82,7 +81,6 @@ void Driver::Load() {
         return;
     }
 
-    std::getline(seller_data, row); // Skip first line with columns
 
     while (std::getline(seller_data, row)) {
         std::vector<std::string> data = Utils::split(row, ",");
@@ -92,13 +90,13 @@ void Driver::Load() {
     seller_data.close();
 
 
+
     // Bids
     std::ifstream bid_data("data/bids.csv");
     if (!bid_data.is_open()) {
         std::cout << "Error opening bid file" << std::endl;
         return;
     }
-    std::getline(bid_data, row); // Skip first line with columns
 
     while (std::getline(bid_data, row)) {
         std::vector<std::string> data = Utils::split(row, ",");
@@ -118,7 +116,6 @@ void Driver::Load() {
         return;
     }
 
-    std::getline(product_data, row); // Skip first line with columns
 
     while (std::getline(product_data, row)) {
         std::vector<std::string> data = Utils::split(row, ",");
@@ -128,13 +125,40 @@ void Driver::Load() {
     product_data.close();
 
 
+    // Buyer Logs
+    std::ifstream buyer_history("data/buyer_history.csv");
+    if (!buyer_history.is_open()) {
+        std::cout << "Error opening buyer history file" << std::endl;
+        return;
+    }
+
+
+    while (std::getline(buyer_history, row)) {
+        buyerHistory.push_back(row);
+    }
+    buyer_history.close();
+
+    // Seller Logs
+    std::ifstream seller_history("data/seller_history.csv");
+    if (!seller_history.is_open()) {
+        std::cout << "Error opening buyer history file" << std::endl;
+        return;
+    }
+
+
+    while (std::getline(seller_history, row)) {
+        sellerHistory.push_back(row);
+    }
+    seller_history.close();
+
 
 
     std::cout << buyers.size() << std::endl;
     std::cout << sellers.size() << std::endl;
     std::cout << bids.size() << std::endl;
     std::cout << productsForSale.size() << std::endl;
-
+    std::cout << sellerHistory.size() << std::endl;
+    std::cout << buyerHistory.size() << std::endl;
 }
 
 void Driver::Commit() {

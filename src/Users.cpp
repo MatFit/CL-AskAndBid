@@ -60,7 +60,9 @@ void Seller::dashboard() {
         std::cout << "2.) Update User Information" << std::endl;
         std::cout << "3.) Overview Your Products" << std::endl;
         std::cout << "4.) Adjust bids for products" << std::endl;
-        std::cout << "5.) Exit" << std::endl;
+        std::cout << "5.) Place product for sale" << std::endl;
+        std::cout << "6.) Seller's History" << std::endl;
+        std::cout << "7.) Exit" << std::endl;
 
         std::cin >> input;
 
@@ -80,6 +82,11 @@ void Seller::dashboard() {
                 adjustBidsforProducts();
                 break;
             case 5:
+                break;
+            case 6:
+                history();
+                break;
+            case 7:
                 exit = true;
                 break;
             default:
@@ -102,7 +109,6 @@ void Seller::productOverview() {
         }
     }
 }
-
 // Curently not fully working because of no sell history
 void Seller::bidHistory() {
     std::cout << "Your products.\n";
@@ -177,6 +183,11 @@ void Seller::adjustBidsforProducts() {
         }
     }
 }
+
+
+
+
+
 
 
 // BUYER METHOD

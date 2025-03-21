@@ -20,7 +20,6 @@ class Driver {
         std::vector<Buyer*>& getBuyers() { return buyers; }
         std::vector<Bid*>& getBids() { return bids; }
         std::vector<Product*>& getProducts() { return productsForSale; }
-        std::vector<Product*>& getSold() { return sold; }
         std::vector<std::string> getBuyerHistory() { return buyerHistory; }
         std::vector<std::string> getSellerHistory() { return sellerHistory; }
 
@@ -33,7 +32,6 @@ class Driver {
         void addBid(std::string username, std::string password, PRODUCT_TYPE product_type, double bid_price) { 
             bids.push_back(new Bid(username, password, product_type, bid_price)); 
         }
-        // void addProduct(Product* product) { productsForSale.push_back(product); }
 
 
         void Run();
@@ -56,7 +54,6 @@ class Driver {
         std::vector<Product*> productsForSale;
         std::vector<std::string> buyerHistory;
         std::vector<std::string> sellerHistory;
-        std::vector<Product*> sold;
 
         Driver();
 };
