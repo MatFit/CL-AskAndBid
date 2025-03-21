@@ -22,15 +22,15 @@ void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& products
                 // Add product to buyer's purchased items
                 addProductToBuyer(bid->getUsername(), bid->getPassword(), product);
                 
-                // Notify
+                // Notify active buyer user
                 activeUser->notify();
-
-                std::string buyerLog = "Buyer " + activeUser->getUsername() + " purchased " + Utils::productToString(product->getProductType());
-                std::string sellerLog = "Seller " + activeUser->getUsername() + " purchased " + Utils::productToString(product->getProductType());
+                
+                // Append history logs 
+                std::string buyerLog = "Buyer " + bid->getUsername() + " bought " + Utils::productToString(product->getProductType()) + " from " + product->getUsername();
+                std::string sellerLog = "Seller " + product->getUsername() + " sold " + Utils::productToString(product->getProductType()) + " to " + bid->getUsername();
 
                 Driver::getInstance()->addToBuyerHistory(buyerLog);
                 Driver::getInstance()->addToSellerHistory(sellerLog);
-
             }
         }
     }
@@ -40,6 +40,7 @@ void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& products
 void Manager::transferFunds(Bid* bid, Product* product) {
     for (auto buyer : Driver::getInstance()->getBuyers()) {
         if (buyer->getUsername() == bid->getUsername() && buyer->checkPassword(bid->getPassword())) {
+
             for (auto seller : Driver::getInstance()->getSellers()) {
                 if (seller->getUsername() == product->getUsername() && 
                     seller->checkPassword(product->getPassword())) {
@@ -56,6 +57,7 @@ void Manager::transferFunds(Bid* bid, Product* product) {
                 }
             }
         }
+
     }
 }
 

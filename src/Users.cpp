@@ -204,7 +204,8 @@ void Buyer::dashboard() {
         std::cout << "4.) View Products for Sale" << std::endl;
         std::cout << "5.) Place a bid" << std::endl;
         std::cout << "6.) View bids" << std::endl;
-        std::cout << "7.) Exit" << std::endl;
+        std::cout << "7.) History" << std::endl;
+        std::cout << "8.) Exit" << std::endl;
         std::cin >> input; 
 
         switch (input) { 
@@ -229,6 +230,9 @@ void Buyer::dashboard() {
                 viewBids();
                 break;
             case 7:
+                history();
+                break;
+            case 8:
                 exit = true;
                 break;
             default:
