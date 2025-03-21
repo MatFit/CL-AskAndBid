@@ -238,6 +238,7 @@ void Buyer::dashboard() {
 
 
 }
+
 void Buyer::listProductsForSale() {
     std::cout << "PRODUCT STORE \n" << std::endl;
     std::vector<Product*> products = Driver::getInstance()->getProducts();
