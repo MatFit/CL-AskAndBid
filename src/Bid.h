@@ -2,6 +2,8 @@
 #define BID_H
 #include <string>
 #include "Product.h"
+#include "Utils.h"
+
 
 class Bid {
     public:
@@ -17,7 +19,7 @@ class Bid {
         double getBidPrice() { return bid_price; }
 
         friend std::ostream& operator<<(std::ostream& os, const Bid& bid) {
-            os << "Product Type: " << bid.product_type << " Bid Amount: " << bid.bid_price;
+            os << "Product Type: " << Utils::productToString(bid.product_type) << " Bid Amount: " << bid.bid_price;
             return os;
         };
 

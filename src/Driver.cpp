@@ -14,37 +14,6 @@
 Driver* Driver::instance = nullptr;
 Manager* Driver::manager = nullptr; 
 
-std::map<std::string, PRODUCT_TYPE> productMap = {
-    {"ELECTRONICS_PHONE", PRODUCT_TYPE::ELECTRONICS_PHONE}
-};
-
-PRODUCT_TYPE stringToProduct(const std::string& str) {
-    auto it = productMap.find(str);
-    if (it != productMap.end()) {
-        return it->second;
-    }
-    throw std::invalid_argument("Invalid color string: " + str);
-}
-
-
-
-// Helper function to split csv with delimiter (",")
-std::vector<std::string> split(std::string& s, const std::string& delimiter) {
-    std::vector<std::string> tokens;
-    size_t position = 0;
-    std::string substring;
-    
-    while ((position = s.find(delimiter)) != std::string::npos) {
-        substring = s.substr(0, position);
-        tokens.push_back(substring);
-        s.erase(0, position + delimiter.length());
-    }
-    tokens.push_back(s);
-
-    return tokens;
-}
-
-
 
 Driver::Driver() {
     manager = Manager::getInstance();
@@ -100,7 +69,7 @@ void Driver::Load() {
     std::getline(buyer_data, row); // Skip first line with columns
 
     while (std::getline(buyer_data, row)) {
-        std::vector<std::string> data = split(row, ",");
+        std::vector<std::string> data = Utils::split(row, ",");
         Buyer *buyer = new Buyer(data[0], data[1], data[2], data[3], std::stod(data[4]));
         buyers.push_back(buyer);
     }
@@ -119,7 +88,7 @@ void Driver::Load() {
     std::getline(seller_data, row); // Skip first line with columns
 
     while (std::getline(seller_data, row)) {
-        std::vector<std::string> data = split(row, ",");
+        std::vector<std::string> data = Utils::split(row, ",");
         Seller *seller = new Seller(data[0], data[1], data[2], data[3], std::stod(data[4]));
         sellers.push_back(seller);
     }
@@ -135,8 +104,8 @@ void Driver::Load() {
     std::getline(bid_data, row); // Skip first line with columns
 
     while (std::getline(bid_data, row)) {
-        std::vector<std::string> data = split(row, ",");
-        Bid *bid = new Bid(data[0], data[1], stringToProduct(data[2]), std::stod(data[3]));
+        std::vector<std::string> data = Utils::split(row, ",");
+        Bid *bid = new Bid(data[0], data[1], Utils::stringToProduct(data[2]), std::stod(data[3]));
         bids.push_back(bid);
     }
     bid_data.close();
@@ -155,8 +124,8 @@ void Driver::Load() {
     std::getline(product_data, row); // Skip first line with columns
 
     while (std::getline(product_data, row)) {
-        std::vector<std::string> data = split(row, ",");
-        Product *product = ProductFactory::createProduct(stringToProduct(data[2]), std::stod(data[3]), PRODUCT_QUALITY::NEW, data[0], data[1]);
+        std::vector<std::string> data = Utils::split(row, ",");
+        Product *product = ProductFactory::createProduct(Utils::stringToProduct(data[2]), std::stod(data[3]), PRODUCT_QUALITY::NEW, data[0], data[1]);
         productsForSale.push_back(product);
     }
     product_data.close();
@@ -172,7 +141,6 @@ void Driver::Load() {
 }
 
 void Driver::Commit() {
-
 }
 
 void Driver::Login(){
