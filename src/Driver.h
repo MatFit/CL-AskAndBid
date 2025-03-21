@@ -20,6 +20,7 @@ class Driver {
         std::vector<Buyer*>& getBuyers() { return buyers; }
         std::vector<Bid*>& getBids() { return bids; }
         std::vector<Product*>& getProducts() { return productsForSale; }
+        std::vector<Product*>& getSold() { return sold; }
 
 
         void addBid(std::string username, std::string password, PRODUCT_TYPE product_type, double bid_price) { 
@@ -47,6 +48,7 @@ class Driver {
         // Manager class will handle and notify
         std::vector<Bid*> bids;
         std::vector<Product*> productsForSale;
+        std::vector<Product*> sold;
 
         Driver();
 };
