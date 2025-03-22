@@ -17,6 +17,7 @@ class Bid {
         std::string getUsername() { return username; }
         std::string getPassword() { return password; }
         double getBidPrice() { return bid_price; }
+        PRODUCT_TYPE getProductType() { return product_type; }
 
         friend std::ostream& operator<<(std::ostream& os, const Bid& bid) {
             os << "Product Type: " << Utils::productToString(bid.product_type) << " Bid Amount: " << bid.bid_price;

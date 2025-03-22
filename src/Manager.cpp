@@ -12,9 +12,16 @@ Manager::Manager() {}
 
 // TODO : REMOVE BOTH BID AND PRODUCT AFTER SUCCESSFULL TRANSACTION, MAKE SURE VECTORS IN DRIVER CLASS ARE CHANGED
 void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale, User* activeUser) {
-    // We love auto
-    for (auto bid : bids) {
-        for (auto product : productsForSale) {
+    auto bid_it = Driver::getInstance()->getBids().begin();
+    
+    while (bid_it != Driver::getInstance()->getBids().end()) {
+        auto product_it = Driver::getInstance()->getProducts().begin();
+        bool matchFound = false;
+        
+        while (product_it != Driver::getInstance()->getProducts().end() && !matchFound) {
+            Bid* bid = *bid_it;
+            Product* product = *product_it;
+            
             if (bid->getBidPrice() == product->getProductPrice() && product->getOpenBid()) {
                 product->setOpenBid(false);
 
@@ -33,7 +40,18 @@ void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& products
 
                 Driver::getInstance()->addToBuyerHistory(buyerLog);
                 Driver::getInstance()->addToSellerHistory(sellerLog);
+                
+                // Remove matched bid and product from Driver's vectors by address
+                bid_it = Driver::getInstance()->getBids().erase(bid_it);
+                product_it = Driver::getInstance()->getProducts().erase(product_it);
+                matchFound = true;
+            } else {
+                ++product_it;
             }
+        }
+        
+        if (!matchFound) {
+            ++bid_it; // Only increment if no match was found
         }
     }
 }

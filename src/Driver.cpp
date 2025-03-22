@@ -47,7 +47,7 @@ void Driver::Run() {
     
     activeUser->dashboard(); // -> handle the next phase stuff here?
 
-    Commit(); // Once user exits their dashboard this method is responsible to rewrite data back into the csv's
+    Save(); // Once user exits their dashboard this method is responsible to rewrite data back into the csv's
 }
 
 void Driver::Load() {
@@ -164,9 +164,102 @@ void Driver::Load() {
 
 }
 
-void Driver::Commit() {
-    // This method will be used to take all the vectors and rewrite our csvs so data is saved from each program iteration
+void Driver::Save() {
+    // Save Buyers
+    std::ofstream buyer_data("data/buyer_data.csv");
+    if (!buyer_data.is_open()) {
+        std::cout << "Error opening buyer file for writing" << std::endl;
+        return;
+    }
+
+    for (const auto& buyer : buyers) {
+        buyer_data << buyer->getUsername() << "," 
+                   << buyer->getPassword() << "," 
+                   << buyer->getAddress() << "," 
+                   << buyer->getNumber() << "," 
+                   << buyer->getAccountBalance() << std::endl;
+    }
+    buyer_data.close();
+
+
     
+    // Save Sellers
+    std::ofstream seller_data("data/seller_data.csv");
+    if (!seller_data.is_open()) {
+        std::cout << "Error opening seller file for writing" << std::endl;
+        return;
+    }
+
+    for (const auto& seller : sellers) {
+        seller_data << seller->getUsername() << "," 
+                    << seller->getPassword() << "," 
+                    << seller->getAddress() << "," 
+                    << seller->getNumber() << "," 
+                    << seller->getAccountBalance() << std::endl;
+    }
+    seller_data.close();
+    
+
+
+    // Save Bids
+    std::ofstream bid_data("data/bids.csv");
+    if (!bid_data.is_open()) {
+        std::cout << "Error opening bid file for writing" << std::endl;
+        return;
+    }
+
+    for (const auto& bid : bids) {
+        bid_data << bid->getUsername() << "," 
+                 << bid->getPassword() << "," 
+                 << Utils::productToString(bid->getProductType()) << "," 
+                 << bid->getBidPrice() << std::endl;
+    }
+    bid_data.close();
+    
+
+
+    // Save Products
+    std::ofstream product_data("data/products.csv");
+    if (!product_data.is_open()) {
+        std::cout << "Error opening product file for writing" << std::endl;
+        return;
+    }
+
+    for (const auto& product : productsForSale) {
+        product_data << product->getUsername() << "," 
+                     << product->getPassword() << "," 
+                     << Utils::productToString(product->getProductType()) << "," 
+                     << product->getProductPrice() << "," 
+                     << product->getOpenBid() << std::endl;
+    }
+    product_data.close();
+    
+
+    // Save Buyer History
+    std::ofstream buyer_history("data/buyer_history.csv");
+    if (!buyer_history.is_open()) {
+        std::cout << "Error opening buyer history file for writing" << std::endl;
+        return;
+    }
+
+    for (const auto& history : buyerHistory) {
+        buyer_history << history << std::endl;
+    }
+    buyer_history.close();
+    
+
+    
+    // Save Seller History
+    std::ofstream seller_history("data/seller_history.csv");
+    if (!seller_history.is_open()) {
+        std::cout << "Error opening seller history file for writing" << std::endl;
+        return;
+    }
+
+    for (const auto& history : sellerHistory) {
+        seller_history << history << std::endl;
+    }
+    seller_history.close();
 }
 
 void Driver::Login(){

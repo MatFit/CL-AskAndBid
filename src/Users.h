@@ -27,6 +27,9 @@ class User {
         void setAccountBalance(double price) { account_balance_ += price; }
         double getAccountBalance() const { return account_balance_; }
         std::string getUsername() { return username_; }
+        std::string getPassword() { return password_; }
+        std::string getAddress() { return address_; }
+        std::string getNumber() { return phone_no_; }
         bool checkPassword(const std::string input) { return password_ == input; }
 
     protected:
