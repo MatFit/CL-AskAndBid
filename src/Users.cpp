@@ -194,6 +194,9 @@ void Seller::placeProductforSale() {
         std::cout << "What Product do you want to post?" << std::endl;
         std::cout << "1.) Phone" << std::endl;
         std::cout << "2.) Audiobook" << std::endl;
+        std::cout << "3.) Couch" << std::endl;
+        std::cout << "4.) Action Figure" << std::endl;
+        std::cout << "5.) Super Sword" << std::endl;
         std::cout << "0.) Cancel" << std::endl;
         std::cout << "Enter your choice: ";
         std::cin >> input_product;
@@ -202,7 +205,7 @@ void Seller::placeProductforSale() {
             return;
         }
         
-        if (input_product != 1 && input_product != 2) {
+        if (input_product < 1 || input_product > 5) {
             std::cout << "Invalid product choice. Please try again." << std::endl;
             continue;
         }
@@ -232,22 +235,19 @@ void Seller::placeProductforSale() {
         
     } while (true);
     
-    
     PRODUCT_TYPE type;
     switch (input_product) {
-        case 1:
-            type = PRODUCT_TYPE::ELECTRONICS_PHONE;
-            break;
-        case 2:
-            type = PRODUCT_TYPE::MEDIA_AUDIOBOOK;
-            break;
+        case 1: type = PRODUCT_TYPE::ELECTRONICS_PHONE; break;
+        case 2: type = PRODUCT_TYPE::MEDIA_AUDIOBOOK; break;
+        case 3: type = PRODUCT_TYPE::FURNITURE_COUCH; break;
+        case 4: type = PRODUCT_TYPE::TOY_ACTIONFIGURE; break;
+        case 5: type = PRODUCT_TYPE::WEAPON_SUPERSWORD; break;
         default:
             std::cout << "Invalid product type." << std::endl;
             return;
     }
     
-    // Static cast for int to convert to the enum quality by mapping
-    PRODUCT_QUALITY quality = static_cast<PRODUCT_QUALITY>(input_quality); // This saved the day
+    PRODUCT_QUALITY quality = static_cast<PRODUCT_QUALITY>(input_quality);
     Product* newProduct = ProductFactory::createProduct(type, input_price, quality, username_, password_, true);
     
     if (newProduct) {
@@ -258,6 +258,7 @@ void Seller::placeProductforSale() {
         std::cout << "Failed to create product. Please try again." << std::endl;
     }
 }
+
 
 
 
@@ -351,44 +352,54 @@ void Buyer::listBoughtItems() {
 }
 
 void Buyer::placeBidforProduct() {
-    bool exit = false;
-    PRODUCT_TYPE product_type;
-    double bid_price;
-    int input;
-
-    do {
-        std::cout << "Place bid for a product."  << std::endl;
-        std::cout << "Item to place on bid: " << std::endl;
-        std::cout << "1.) Phone " << std::endl;
-        std::cout << "2.) Audiobook " << std::endl;
-        std::cin >> input;
+    int input_product;
+    double input_price;
     
-
-        switch (input) {
-            case 1:
-                product_type = PRODUCT_TYPE::ELECTRONICS_PHONE;
-                exit = true;
-                break;
-            case 2:
-                product_type = PRODUCT_TYPE::MEDIA_AUDIOBOOK;
-                exit = true;
-                break;
-            default:
-                std::cout << "Invalid Option" << std::endl;
-        }
-    } while(!exit);
-
-
-
     do {
-        std::cout << "Bid Price: " << std::endl;
-        if (std::cin >> bid_price && bid_price > 0) exit = true;
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "What Product do you want to bid on?" << std::endl;
+        std::cout << "1.) Phone" << std::endl;
+        std::cout << "2.) Audiobook" << std::endl;
+        std::cout << "3.) Couch" << std::endl;
+        std::cout << "4.) Action Figure" << std::endl;
+        std::cout << "5.) Super Sword" << std::endl;
+        std::cout << "0.) Cancel" << std::endl;
+        std::cout << "Enter your choice: ";
+        std::cin >> input_product;
         
-    } while(!exit);
-
-    Driver::getInstance()->addBid(username_, password_, product_type, bid_price);
+        if (input_product == 0) {
+            return;
+        }
+        
+        if (input_product < 1 || input_product > 5) {
+            std::cout << "Invalid product choice. Please try again." << std::endl;
+            continue;
+        }
+        
+        std::cout << "Enter bid price: $";
+        std::cin >> input_price;
+        
+        if (input_price <= 0) {
+            std::cout << "Bid price must be greater than zero. Please try again." << std::endl;
+            continue;
+        }
+        
+        break;
+        
+    } while (true);
+    
+    PRODUCT_TYPE type;
+    switch (input_product) {
+        case 1: type = PRODUCT_TYPE::ELECTRONICS_PHONE; break;
+        case 2: type = PRODUCT_TYPE::MEDIA_AUDIOBOOK; break;
+        case 3: type = PRODUCT_TYPE::FURNITURE_COUCH; break;
+        case 4: type = PRODUCT_TYPE::TOY_ACTIONFIGURE; break;
+        case 5: type = PRODUCT_TYPE::WEAPON_SUPERSWORD; break;
+        default:
+            std::cout << "Invalid product type." << std::endl;
+            return;
+    }
+    
+    Driver::getInstance()->addBid(username_, password_, type, input_price);
 }
 
 void Buyer::viewBids() {

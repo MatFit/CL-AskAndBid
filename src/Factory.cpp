@@ -9,6 +9,15 @@ Product* ProductFactory::createProduct(PRODUCT_TYPE type, double base_price, PRO
         case MEDIA_AUDIOBOOK:
             return new AudioBook(base_price, product_quality, username, password, is_bid_open, type);
         
+        case FURNITURE_COUCH:
+            return new Couch(base_price, product_quality, username, password, is_bid_open, type);
+
+        case TOY_ACTIONFIGURE:
+            return new ActionFigure(base_price, product_quality, username, password, is_bid_open, type);
+
+        case WEAPON_SUPERSWORD:
+            return new SuperSword(base_price, product_quality, username, password, is_bid_open, type);
+
         default:
             throw std::invalid_argument("Invalid product type");
     }

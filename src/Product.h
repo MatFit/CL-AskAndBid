@@ -7,7 +7,7 @@
 #include <map>
 
 enum PRODUCT_QUALITY {NEW, USED_VERY_GOOD, USED_GOOD, USED_OKAY};
-enum PRODUCT_TYPE {ELECTRONICS_PHONE, MEDIA_AUDIOBOOK};
+enum PRODUCT_TYPE {ELECTRONICS_PHONE, MEDIA_AUDIOBOOK, FURNITURE_COUCH, TOY_ACTIONFIGURE, WEAPON_SUPERSWORD};
 
 inline std::string qualityToString(PRODUCT_QUALITY quality) {
     switch(quality) {
@@ -89,5 +89,57 @@ class AudioBook : public Media {
 
         std::string getClassName() const override { return "Audiobook"; }
 };
+
+// 3rd Layer
+class Furniture : public Product {
+    public:
+        Furniture(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid, PRODUCT_TYPE product_type) 
+        : Product(base_price, product_quality, username, password, is_open_bid, product_type) {}
+
+        std::string getClassName() const override { return "Furniture"; }
+};
+
+class Couch : public Furniture {
+    public:
+        Couch(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid, PRODUCT_TYPE product_type) 
+        : Furniture(base_price, product_quality, username, password, is_open_bid, product_type) {}
+
+        std::string getClassName() const override { return "Couch"; }
+};
+
+// 4th Layer 
+class Toy : public Product {
+    public:
+        Toy(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid, PRODUCT_TYPE product_type) 
+        : Product(base_price, product_quality, username, password, is_open_bid, product_type) {}
+
+        std::string getClassName() const override { return "Toy"; }
+};
+
+class ActionFigure : public Toy {
+    public:
+        ActionFigure(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid, PRODUCT_TYPE product_type) 
+        : Toy(base_price, product_quality, username, password, is_open_bid, product_type) {}
+
+        std::string getClassName() const override { return "ActionFigure"; }
+};
+
+// 5th Layer
+class Weapon : public Product {
+    public:
+        Weapon(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid, PRODUCT_TYPE product_type) 
+        : Product(base_price, product_quality, username, password, is_open_bid, product_type) {}
+
+        std::string getClassName() const override { return "Weapon"; }
+};
+
+class SuperSword : public Weapon {
+    public:
+        SuperSword(double base_price, PRODUCT_QUALITY product_quality, std::string username, std::string password, bool is_open_bid, PRODUCT_TYPE product_type) 
+        : Weapon(base_price, product_quality, username, password, is_open_bid, product_type) {}
+
+        std::string getClassName() const override { return "SuperSword"; }
+};
+
 
 #endif
