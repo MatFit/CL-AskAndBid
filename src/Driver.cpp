@@ -202,6 +202,7 @@ void Driver::Load() {
     @return void
 */
 void Driver::Save() {
+
     // Save Buyers
     std::ofstream buyer_data("data/buyer_data.csv");
     if (!buyer_data.is_open()) {
@@ -464,11 +465,11 @@ void Driver::CreateAccount() {
 
     // Create User object
     if (account_type == 1) {
-        Buyer *buyer = new Buyer(phone_number, password, username, address, account_balance);
+        Buyer *buyer = new Buyer(username, password, address, phone_number, account_balance);
         buyers.push_back(buyer);
         activeUser = buyer;
     } else {
-        Seller *seller = new Seller(phone_number, password, username, address, account_balance);
+        Seller *seller = new Seller(username, password, address, phone_number, account_balance);
         sellers.push_back(seller);
         activeUser = seller;
     }
