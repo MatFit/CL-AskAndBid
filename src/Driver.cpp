@@ -22,6 +22,18 @@ Driver* Driver::instance = nullptr;
 
 Driver::Driver() {}
 
+/**
+    Runs the main driver loop, handling user authentication and navigation.
+
+    This function:
+    - Loads initial data.
+    - Prompts the user to log in or create an account.
+    - Navigates to the store front.
+    - If a user is active, it directs them to their dashboard.
+    - Saves data before exiting.
+
+    @return void
+*/
 void Driver::Run() {
     Load();
 
@@ -56,6 +68,16 @@ void Driver::Run() {
     Save(); // Once user exits their dashboard this method is responsible to rewrite data back into the csv's
 }
 
+/**
+    Loads all necessary data from CSV files into appropriate vectors.
+
+    This function:
+    - Reads buyer, seller, bid, product, and transaction history data.
+    - Parses CSV files and populates respective data structures.
+    - Handles file errors by displaying error messages if files cannot be opened.
+
+    @return void
+*/
 void Driver::Load() {
     /*
         I believe this method properly stores all accounts in the appropriate vectors in the
@@ -170,6 +192,15 @@ void Driver::Load() {
 
 }
 
+/**
+    Saves all user and transaction data to CSV files.
+
+    This method writes the current state of buyers, sellers, bids, products, 
+    and transaction histories to their respective CSV files. Each category 
+    is saved in a separate file to persist data between sessions.
+
+    @return void
+*/
 void Driver::Save() {
     // Save Buyers
     std::ofstream buyer_data("data/buyer_data.csv");
@@ -268,6 +299,16 @@ void Driver::Save() {
     seller_history.close();
 }
 
+/**
+    Handles user login for buyers and sellers.
+
+    This method prompts the user to select an account type (Buyer or Seller) and 
+    then requests login credentials (username and password). It verifies the 
+    credentials against stored user data. If the login is successful, the active 
+    user is set. The user has up to 3 attempts before the function exits.
+
+    @return void
+*/
 void Driver::Login(){
 
     // Account type login
@@ -345,8 +386,18 @@ void Driver::Login(){
     }
 }
 
+/**
+    Handles user account creation for buyers and sellers.
+
+    Prompts the user to select an account type, input credentials (username, 
+    password, address, phone number, and account balance), and stores this 
+    information in both memory and a CSV file.
+
+    Ensures valid input and prevents duplicate usernames.
+
+    @return void
+*/
 void Driver::CreateAccount() {
-    std::cout << "We creating in baby" << std::endl;
 
     std::string username, password, address, phone_number;
     double account_balance;

@@ -15,7 +15,15 @@ Manager* Manager::instance = nullptr;
 Manager::Manager() {}
 
 
-// TODO : REMOVE BOTH BID AND PRODUCT AFTER SUCCESSFULL TRANSACTION, MAKE SURE VECTORS IN DRIVER CLASS ARE CHANGED
+/**
+    Matches bids to products based on bid and product price.
+
+    @param bids A vector of Bid pointers representing the current bids.
+    @param productsForSale A vector of Product pointers representing the available products for sale.
+    @param activeUser The currently logged-in user who will be notified after a successful match.
+    @return Void. The function modifies the state of the product and bid lists, transfers funds, 
+            adds purchase history, and updates the open bid status.
+*/
 void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& productsForSale, User* activeUser) {
     auto bid_it = Driver::getInstance()->getBids().begin();
     
@@ -61,6 +69,13 @@ void Manager::matchBids(std::vector<Bid*>& bids, std::vector<Product*>& products
     }
 }
 
+/**
+    Transfers funds from the buyer to the seller based on the matched bid and product.
+
+    @param bid The Bid object representing the buyer's bid on the product.
+    @param product The Product object representing the product being bought.
+    @return Void. The function updates the account balances of the buyer and seller accordingly.
+*/
 void Manager::transferFunds(Bid* bid, Product* product) {
     for (auto buyer : Driver::getInstance()->getBuyers()) {
         if (buyer->getUsername() == bid->getUsername() && buyer->checkPassword(bid->getPassword())) {
@@ -85,6 +100,14 @@ void Manager::transferFunds(Bid* bid, Product* product) {
     }
 }
 
+/**
+    Adds a purchased product to the specified buyer's list of purchased products.
+
+    @param username The username of the buyer making the purchase.
+    @param password The password of the buyer for authentication.
+    @param product The Product object representing the product being purchased.
+    @return Void. The function updates the buyer's purchase history by adding the product to their list of purchased products.
+*/
 void Manager::addProductToBuyer(std::string username, std::string password, Product* product) {
     for (auto buyer : Driver::getInstance()->getBuyers()) {
         if (buyer->getUsername() == username && buyer->checkPassword(password)) {

@@ -22,7 +22,18 @@ const std::map<std::string, PRODUCT_TYPE> Utils::stringToTypeMap = {
 };
 
 
+/**
+    Converts a PRODUCT_TYPE to its corresponding string representation.
 
+    This function looks up the provided PRODUCT_TYPE in a map that associates each 
+    product type with a string. If the type is found, its string representation is 
+    returned. If the type is not found, an exception is thrown indicating an invalid 
+    product type.
+
+    @param type The PRODUCT_TYPE to convert.
+    @return A string representing the product type.
+    @throws std::invalid_argument If the product type is not found in the map.
+*/
 std::string Utils::productToString(const PRODUCT_TYPE& type) {
     auto it = typeToStringMap.find(type);
     if (it != typeToStringMap.end()) {
@@ -31,6 +42,18 @@ std::string Utils::productToString(const PRODUCT_TYPE& type) {
     throw std::invalid_argument("Invalid product type");
 }
 
+/**
+    Converts a string to its corresponding PRODUCT_TYPE.
+
+    This function looks up the provided string in a map that associates each string 
+    representation of a product type with the corresponding PRODUCT_TYPE. If the string 
+    is found, the corresponding PRODUCT_TYPE is returned. If the string is not found, 
+    an exception is thrown indicating that the provided product string is invalid.
+
+    @param str The string to convert to a PRODUCT_TYPE.
+    @return The corresponding PRODUCT_TYPE.
+    @throws std::invalid_argument If the string is not found in the map.
+*/
 PRODUCT_TYPE Utils::stringToProduct(const std::string& str) {
     auto it = stringToTypeMap.find(str);
     if (it != stringToTypeMap.end()) {
@@ -39,6 +62,18 @@ PRODUCT_TYPE Utils::stringToProduct(const std::string& str) {
     throw std::invalid_argument("Invalid product string: " + str);
 }
 
+/**
+    Splits a string into substrings based on a delimiter.
+
+    This function divides the input string `s` into multiple substrings, each 
+    occurring between instances of the specified `delimiter`. The substrings are 
+    stored in a vector of strings. The function iterates through the string, finding 
+    each occurrence of the delimiter and extracting the corresponding substring.
+
+    @param s The string to be split. The input string is modified by this function.
+    @param delimiter The delimiter used to split the string.
+    @return A vector containing the substrings.
+*/
 std::vector<std::string> Utils::split(std::string& s, const std::string& delimiter) {
     std::vector<std::string> tokens;
     size_t position = 0;
