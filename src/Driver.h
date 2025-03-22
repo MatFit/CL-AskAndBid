@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the header file that contains the structure of our driver class
+*/
 #ifndef DRIVER_H
 #define DRIVER_H
 #include "Users.h"

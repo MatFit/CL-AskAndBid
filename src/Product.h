@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the header file for product that contains the structure of the class
+*/
 #ifndef PRODUCT_H
 #define PRODUCT_H
 

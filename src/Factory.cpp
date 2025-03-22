@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the factory class taht handels the creation of products.
+*/
 #include "Factory.h"
 #include "Product.h"
 

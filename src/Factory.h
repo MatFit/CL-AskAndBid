@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the header file that contains the structure of our factory class
+*/
 #ifndef FACTORY_H
 #define FACTORY_H
 #include "Product.h"

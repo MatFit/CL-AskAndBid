@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is our manager class that handels money and bids
+*/
 #include "Manager.h"
 #include "Driver.h"
 #include "Users.h"

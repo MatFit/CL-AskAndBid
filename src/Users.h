@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the header file that contains the structure of Users
+*/
 #ifndef USER_H
 #define USER_H
 #include "Bid.h"

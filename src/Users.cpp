@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is implementation for users that handels all seller and buyer specfic functionalites aswell as there front end implementations.
+*/
 #include "Bid.h"
 #include "Driver.h"
 #include "Manager.h"

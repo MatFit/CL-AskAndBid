@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the header file that contains the structure of our bids
+*/
 #ifndef BID_H
 #define BID_H
 #include <string>

@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the header file that contains the implementaion of utility functions and some string casting
+*/
 #include "Utils.h"
 
 const std::map<PRODUCT_TYPE, std::string> Utils::typeToStringMap = {

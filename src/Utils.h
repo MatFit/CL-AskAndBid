@@ -1,3 +1,8 @@
+/**
+Nolan Tibbles and Mathis Fituwi
+Homework 3
+This is the header file that contains the structure of utils
+*/
 #ifndef UTILS_H
 #define UTILS_H
 #include <string>
